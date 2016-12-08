@@ -28,3 +28,15 @@ Inititalizes the underlying FastLED library and sets up variables like the digit
 **lix.clear**();
 
 Clears all displays, all lights off.
+
+**lix.write_int**(unsigned int **input**);
+
+Clears the displays, and pushes in a multi-digit integer as in: 2016
+
+**lix.write_string**(char\* **input**);
+
+Clears the displays, and pushes in a char array as in: "2016". This ignores any non-numeric chars in the string, allowing you to send "12:52:47 PM" and have the displays show "12 52 47" for a clock.
+
+**lix.color_on_rgb/hsv**(byte **r/h**, byte **g/s**, byte **b/v**);
+
+Sets the "on" color of the digits using RGB or HSV, depending on which function you write. (8 bit values)
