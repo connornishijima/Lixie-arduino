@@ -17,3 +17,14 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
       lix.write_int( millis() );       // Write millis() to the displays
       delay(1);
     }
+
+----------
+# Functions
+
+**lix.begin**();
+
+Inititalizes the underlying FastLED library and sets up variables like the digit colors.
+
+**lix.clear**();
+
+Clears all displays, all lights off.
