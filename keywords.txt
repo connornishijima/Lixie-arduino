@@ -1,5 +1,5 @@
 ###################################
-# Syntax Coloring Map for Volume
+# Syntax Coloring Map for Lixie
 ###################################
 
 ###################################
@@ -11,17 +11,18 @@
 ###################################
 
 begin	KEYWORD2
-end	KEYWORD2
-alternatePin	KEYWORD2
-fadeOut	KEYWORD2
-throwError	KEYWORD2
-tone	KEYWORD2
-noTone	KEYWORD2
-millis	KEYWORD2
-micros	KEYWORD2
-delay	KEYWORD2
-delayMicroseconds	KEYWORD2
-setMasterVolume	KEYWORD2
+write_string	KEYWORD2
+write_int	KEYWORD2
+push_digit	KEYWORD2
+write_digit	KEYWORD2
+write_char	KEYWORD2
+show	KEYWORD2
+print_binary	KEYWORD2
+color_on_rgb	KEYWORD2
+color_off_rgb	KEYWORD2
+color_on_hsv	KEYWORD2
+color_off_hsv	KEYWORD2
+clear	KEYWORD2
 
 ###################################
 # Constants (LITERAL1)
