@@ -37,6 +37,18 @@ Clears the displays, and pushes in a multi-digit integer as in: 2016
 
 Clears the displays, and pushes in a char array as in: "2016". This ignores any non-numeric chars in the string, allowing you to send "12:52:47 PM" and have the displays show "12 52 47" for a clock.
 
-**lix.color_on_rgb/hsv**(byte **r/h**, byte **g/s**, byte **b/v**);
+**lix.color_on_rgb**(byte **r**, byte **g**, byte **b**);
 
-Sets the "on" color of the digits using RGB or HSV, depending on which function you write. (8 bit values)
+Sets the "on" color of the digits using RGB. This is the color of an active number in the display. (Default: 255,255,255)
+
+**lix.color_off_rgb**(byte **r**, byte **g**, byte **b**);
+
+Sets the "off" color of the digits using RGB. This is the color of all inactive numbers in the display. (Default: 0,0,0)
+
+**lix.color_on_hsv**(byte **h**, byte **s**, byte **v**);
+
+Sets the "on" color of the digits using HSV. This is the color of an active number in the display. (Default: 0,0,255)
+
+**lix.color_off_hsv**(byte **h**, byte **s**, byte **v**);
+
+Sets the "off" color of the digits using HSV. This is the color of all inactive numbers in the display. (Default: 0,0,0)
