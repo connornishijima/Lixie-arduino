@@ -1,7 +1,7 @@
 ![Lixie Library](http://i.imgur.com/nFgz0Zt.jpg)
 
 #Library for driving Lixie edge-lit displays!
-*Disclaimer: This library is still in early development and may change drastically in the coming weeks!*
+*Disclaimer: This library is still in early development and may change drastically in the coming weeks! It also depends on the "FastLED" library from Daniel Garcia, so make sure you have that installed as well!*
 
 This library allows for easy writing to Lixie digit displays! It takes care of all the addressing and updating for you!
 
