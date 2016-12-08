@@ -16,4 +16,5 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
     
     void loop() {
       lix.write_int( millis() );       // Write millis() to the displays
+      delay(1);
     }
