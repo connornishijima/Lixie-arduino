@@ -5,7 +5,33 @@
 
 This library allows for easy writing to Lixie digit displays! It takes care of all the addressing and updating for you!
 
-#Getting Started:
+----------
+# Contents
+- [Installation](#installation)
+- [Getting Started](#getting-started)
+- [Functions](#functions)
+- [Contributing](#contributing)
+- [License and credits](#license-and-credits)
+
+----------
+# Installation
+
+*The Lixie library relies on the FastLED library from Daniel Garcia, so make sure you have that installed as well!
+
+**With Arduino Library Manager:**
+
+1. Open *Sketch > Include Library > Manage Libraries* in the Arduino IDE.
+2. Search for "Lixie", and select the latest version.
+3. Click the Install button and Arduino will prepare the library and examples for you!
+
+**Manual Install:**
+
+1. Click "Clone or Download" above to get an "Lixie-arduino-master.zip" file.
+2. Extract it's contents to the libraries folder in your sketchbook.
+3. Rename the folder from "Lixie-arduino-master" to "Lixie".
+
+------------
+# Getting Started:
 
     #include "Lixie.h" // Include Lixie Library
     Lixie lix;         // Set class nickname for faster coding
@@ -54,3 +80,13 @@ Sets the "on" color of the digits using HSV. This is the color of an active numb
 **lix.color_off_hsv**(byte **h**, byte **s**, byte **v**);
 
 Sets the "off" color of the digits using HSV. This is the color of all inactive numbers in the display. (Default: 0,0,0)
+
+----------
+# Contributing
+Any advice or pull requests are welcome. :)
+
+----------
+# License and Credits
+**Developed by Connor Nishijima (2016)**
+
+**Released under the [GPLv3 license](http://www.gnu.org/licenses/gpl-3.0.en.html).**
