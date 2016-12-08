@@ -11,7 +11,6 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
     void setup() {
       lix.begin();                     // Initialize LEDs
       lix.color_on_hsv(127,255,255);   // Set color with HSV (CYAN)
-      //lix.color_on_rgb(0,255,255);   // Set color with RGB (CYAN)
     }
     
     void loop() {
