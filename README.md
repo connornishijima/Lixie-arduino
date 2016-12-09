@@ -16,7 +16,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 ----------
 # Installation
 
-*The Lixie library relies on the FastLED library from Daniel Garcia, so make sure you have that installed as well!
+***The Lixie library relies on the FastLED library from Daniel Garcia, so make sure you have that installed as well!***
 
 **With Arduino Library Manager:**
 
