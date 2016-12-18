@@ -19,6 +19,8 @@ class Lixie
     void begin();
 	void clear();
 
+  CRGB hsvToRgb(double h, double s, double v);
+
 	void write_int(float input);
 	void push_digit(byte number);
 	void write_digit(byte input, byte index);
