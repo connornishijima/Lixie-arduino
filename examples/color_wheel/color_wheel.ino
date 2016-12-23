@@ -17,6 +17,10 @@ void loop() {
     hue+=32;                        // Push hue 1/8th through the color wheel
     lix.color_on_hsv(hue,255,255);  // Set new color
   }
+
+  if(count >= pow(10,lix.get_numdigits())){ // If count > number that can be displayed
+    count = 0;
+  }
   
   delay(100);
 }
