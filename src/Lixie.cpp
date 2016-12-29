@@ -193,8 +193,8 @@ void Lixie::write_int(float input){
     uint16_t input_ones = uint16_t(input);
     push_digit(input_ones);
     float input_next = float(input) - input_ones;
-    input = (input_next*10.0)+0.0005; // Floating point numbers are weirdly inaccurate.
-	                              // I dare you to remove that decimal.
+    input = (input_next*10.0)+0.0005; // Floating point numbers are weirdly inaccurate on Arduino.
+	                              // I fucking dare you to remove that "0.0005" there.
   }
 
   show();
