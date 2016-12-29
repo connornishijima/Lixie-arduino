@@ -28,6 +28,7 @@ class Lixie
 
 	void show();
 	void print_binary();
+  uint8_t get_numdigits() const;
 	
 	void color_on_rgb(byte r, byte g, byte b);
 	void color_on_hsv(byte h, byte s, byte v);

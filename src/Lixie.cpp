@@ -300,3 +300,8 @@ void Lixie::print_binary() {
   }
   Serial.println();
 }
+
+uint8_t Lixie::get_numdigits() const{
+  return NUM_DIGITS;
+}
+
