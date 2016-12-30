@@ -10,11 +10,10 @@
 #define NUM_LEDS NUM_DIGITS * 24
 CRGB leds[NUM_LEDS];
 
-CRGB colors[NUM_DIGITS];
-CRGB colors_off[NUM_DIGITS];
-
 byte led_states[NUM_LEDS/8];
 byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
+byte colors[NUM_DIGITS][3];
+byte colors_off[NUM_DIGITS][3];
 
 Lixie::Lixie()
 {
@@ -28,7 +27,7 @@ byte getBit(uint16_t pos){
   return bitRead(led_states[(pos/8)], pos % 8);
 }
 
-CRGB Lixie::hsvToRgb(double h, double s, double v) {
+void hsvToRgb(double h, double s, double v, byte rgb[]) {
     double r2, g2, b2;
 
     h/=255.0;
@@ -50,23 +49,20 @@ CRGB Lixie::hsvToRgb(double h, double s, double v) {
         case 5: r2 = v, g2 = p, b2 = q; break;
     }
 
-    CRGB rgb;
-    rgb.r = r2 * 255;
-    rgb.g = g2 * 255;
-    rgb.b = b2 * 255;
-
-    return rgb;
+    rgb[0] = r2 * 255;
+    rgb[1] = g2 * 255;
+    rgb[2] = b2 * 255;
 }
 
 void Lixie::begin() {
   FastLED.addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
   FastLED.show();
-  
   for(byte i = 0; i < NUM_DIGITS; i++){
-	  colors[i] = CRGB::White;
-    colors_off[i] = CRGB::Black;
+	for(byte c = 0; c < 3; c++){
+	  colors[i][c] = 255;
+	  colors_off[i][c] = 0;
 	}
- 
+  }
   clear();
 }
 
@@ -78,10 +74,18 @@ void Lixie::clear() {
 
 void Lixie::show(){
   for(uint16_t i = 0; i < NUM_LEDS; i++){
-    if(getBit(i) == 1)
-      leds[i] = colors[i/20];
-    else
-      leds[i] = colors_off[i/20];
+    if(getBit(i) == 1){
+	  byte r = colors[i/20][0];
+	  byte g = colors[i/20][1];
+	  byte b = colors[i/20][2];
+      leds[i] = CRGB(r,g,b);
+    }
+    else{
+      byte r = colors_off[i/20][0];
+	  byte g = colors_off[i/20][1];
+	  byte b = colors_off[i/20][2];
+      leds[i] = CRGB(r,g,b);
+    }
   }
   FastLED.show();
 }
@@ -89,9 +93,9 @@ void Lixie::show(){
 // set all on color ------------------------------------
 void Lixie::color_on_rgb(byte r, byte g, byte b){
   for(byte i = 0; i < NUM_DIGITS; i++){
-	  colors[i].r = r;
-	  colors[i].g = g;
-	  colors[i].b = b;
+	colors[i][0] = r;
+	colors[i][1] = g;
+	colors[i][2] = b;
   }
 }
 
@@ -103,15 +107,19 @@ void Lixie::color_on_rgb(CRGB c){
 
 void Lixie::color_on_hsv(byte h, byte s, byte v){
   for(byte i = 0; i < NUM_DIGITS; i++){
-	  colors[i] = hsvToRgb(h,s,v);
+	byte rgb[3];
+	hsvToRgb(h,s,v,rgb);
+	colors[i][0] = rgb[0];
+	colors[i][1] = rgb[1];
+	colors[i][2] = rgb[2];
   }
 }
 
 // set index on color ------------------------------------
 void Lixie::color_on_rgb(byte r, byte g, byte b, byte index){
-  colors[index].r = r;
-  colors[index].g = g;
-  colors[index].b = b;
+  colors[index][0] = r;
+  colors[index][1] = g;
+  colors[index][2] = b;
 }
 
 void Lixie::color_on_rgb(CRGB c, byte index){
@@ -119,15 +127,19 @@ void Lixie::color_on_rgb(CRGB c, byte index){
 }
 
 void Lixie::color_on_hsv(byte h, byte s, byte v, byte index){
-  colors[index] = hsvToRgb(h,s,v);
+  byte rgb[3];
+  hsvToRgb(h,s,v,rgb);
+  colors[index][0] = rgb[0];
+  colors[index][1] = rgb[1];
+  colors[index][2] = rgb[2];
 }
 
 // set all off color -------------------------------------
 void Lixie::color_off_rgb(byte r, byte g, byte b){
   for(byte i = 0; i < NUM_DIGITS; i++){
-  	colors_off[i].r = r;
-  	colors_off[i].g = g;
-  	colors_off[i].b = b;
+	colors_off[i][0] = r;
+	colors_off[i][1] = g;
+	colors_off[i][2] = b;
   }
 }
 
@@ -139,15 +151,19 @@ void Lixie::color_off_rgb(CRGB c){
 
 void Lixie::color_off_hsv(byte h, byte s, byte v){
   for(byte i = 0; i < NUM_DIGITS; i++){
-    colors_off[i] = hsvToRgb(h,s,v);
+    byte rgb[3];
+	hsvToRgb(h,s,v,rgb);
+	colors_off[i][0] = rgb[0];
+	colors_off[i][1] = rgb[1];
+	colors_off[i][2] = rgb[2];
   }
 }
 
 // set index color off -----------------------------------
 void Lixie::color_off_rgb(byte r, byte g, byte b, byte index){
-  colors_off[index].r = r;
-  colors_off[index].g = g;
-  colors_off[index].b = b;
+  colors_off[index][0] = r;
+  colors_off[index][1] = g;
+  colors_off[index][2] = b;
 }
 
 void Lixie::color_off_rgb(CRGB c, byte index){
@@ -155,7 +171,11 @@ void Lixie::color_off_rgb(CRGB c, byte index){
 }
 
 void Lixie::color_off_hsv(byte h, byte s, byte v, byte index){
-  colors_off[index] = hsvToRgb(h,s,v);
+  byte rgb[3];
+  hsvToRgb(h,s,v,rgb);
+  colors_off[index][0] = rgb[0];
+  colors_off[index][1] = rgb[1];
+  colors_off[index][2] = rgb[2];
 }
 
 byte get_size(uint16_t input){
