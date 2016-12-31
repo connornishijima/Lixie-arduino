@@ -32,19 +32,15 @@ class Lixie
 	
 	void color_on_rgb(byte r, byte g, byte b);
 	void color_on_rgb(CRGB c);
-	void color_on_hsv(byte h, byte s, byte v);
 	
 	void color_on_rgb(byte r, byte g, byte b, byte index);
 	void color_on_rgb(CRGB c, byte index);
-	void color_on_hsv(byte h, byte s, byte v, byte index);
 	
 	void color_off_rgb(byte r, byte g, byte b);
 	void color_off_rgb(CRGB c);
-	void color_off_hsv(byte h, byte s, byte v);
 	
 	void color_off_rgb(byte r, byte g, byte b, byte index);
 	void color_off_rgb(CRGB c, byte index);
-	void color_off_hsv(byte h, byte s, byte v, byte index);
 };
 
 #endif
