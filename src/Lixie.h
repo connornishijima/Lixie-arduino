@@ -30,17 +30,17 @@ class Lixie
 	void print_binary();
   uint8_t get_numdigits() const;
 	
-	void color_on_rgb(byte r, byte g, byte b);
-	void color_on_rgb(CRGB c);
+	void color_on(byte r, byte g, byte b);
+	void color_on(CRGB c);
 	
-	void color_on_rgb(byte r, byte g, byte b, byte index);
-	void color_on_rgb(CRGB c, byte index);
+	void color_on(byte r, byte g, byte b, byte index);
+	void color_on(CRGB c, byte index);
 	
-	void color_off_rgb(byte r, byte g, byte b);
-	void color_off_rgb(CRGB c);
+	void color_off(byte r, byte g, byte b);
+	void color_off(CRGB c);
 	
-	void color_off_rgb(byte r, byte g, byte b, byte index);
-	void color_off_rgb(CRGB c, byte index);
+	void color_off(byte r, byte g, byte b, byte index);
+	void color_off(CRGB c, byte index);
 };
 
 #endif
