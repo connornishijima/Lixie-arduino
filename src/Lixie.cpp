@@ -27,33 +27,6 @@ byte getBit(uint16_t pos){
   return bitRead(led_states[(pos/8)], pos % 8);
 }
 
-void hsvToRgb(double h, double s, double v, byte rgb[]) {
-    double r2, g2, b2;
-
-    h/=255.0;
-    s/=255.0;
-    v/=255.0;
-
-    int i = int(h * 6);
-    double f = h * 6 - i;
-    double p = v * (1 - s);
-    double q = v * (1 - f * s);
-    double t = v * (1 - (1 - f) * s);
-
-    switch(i % 6){
-        case 0: r2 = v, g2 = t, b2 = p; break;
-        case 1: r2 = q, g2 = v, b2 = p; break;
-        case 2: r2 = p, g2 = v, b2 = t; break;
-        case 3: r2 = p, g2 = q, b2 = v; break;
-        case 4: r2 = t, g2 = p, b2 = v; break;
-        case 5: r2 = v, g2 = p, b2 = q; break;
-    }
-
-    rgb[0] = r2 * 255;
-    rgb[1] = g2 * 255;
-    rgb[2] = b2 * 255;
-}
-
 void Lixie::begin() {
   FastLED.addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
   FastLED.show();
@@ -103,16 +76,6 @@ void Lixie::color_on_rgb(CRGB c){
   }
 }
 
-void Lixie::color_on_hsv(byte h, byte s, byte v){
-  for(byte i = 0; i < NUM_DIGITS; i++){
-	byte rgb[3];
-	hsvToRgb(h,s,v,rgb);
-	colors[i].r = rgb[0];
-	colors[i].g = rgb[1];
-	colors[i].b = rgb[2];
-  }
-}
-
 // set index on color ------------------------------------
 void Lixie::color_on_rgb(byte r, byte g, byte b, byte index){
   colors[index].r = r;
@@ -122,14 +85,6 @@ void Lixie::color_on_rgb(byte r, byte g, byte b, byte index){
 
 void Lixie::color_on_rgb(CRGB c, byte index){
   colors[index] = c;
-}
-
-void Lixie::color_on_hsv(byte h, byte s, byte v, byte index){
-  byte rgb[3];
-  hsvToRgb(h,s,v,rgb);
-  colors[index].r = rgb[0];
-  colors[index].g = rgb[1];
-  colors[index].b = rgb[2];
 }
 
 // set all off color -------------------------------------
@@ -147,16 +102,6 @@ void Lixie::color_off_rgb(CRGB c){
   }
 }
 
-void Lixie::color_off_hsv(byte h, byte s, byte v){
-  for(byte i = 0; i < NUM_DIGITS; i++){
-    byte rgb[3];
-	hsvToRgb(h,s,v,rgb);
-	colors_off[i].r = rgb[0];
-	colors_off[i].g = rgb[1];
-	colors_off[i].b = rgb[2];
-  }
-}
-
 // set index color off -----------------------------------
 void Lixie::color_off_rgb(byte r, byte g, byte b, byte index){
   colors_off[index].r = r;
@@ -166,14 +111,6 @@ void Lixie::color_off_rgb(byte r, byte g, byte b, byte index){
 
 void Lixie::color_off_rgb(CRGB c, byte index){
   colors_off[index] = c;
-}
-
-void Lixie::color_off_hsv(byte h, byte s, byte v, byte index){
-  byte rgb[3];
-  hsvToRgb(h,s,v,rgb);
-  colors_off[index].r = rgb[0];
-  colors_off[index].g = rgb[1];
-  colors_off[index].b = rgb[2];
 }
 
 byte get_size(uint16_t input){
