@@ -58,10 +58,8 @@ void Lixie::begin() {
   FastLED.addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
   FastLED.show();
   for(byte i = 0; i < NUM_DIGITS; i++){
-	for(byte c = 0; c < 3; c++){
-	  colors[i] = CRGB(255,255,255);
-	  colors_off[i] = CRGB(0,0,0);
-	}
+    colors[i] = CRGB(255,255,255);
+    colors_off[i] = CRGB(0,0,0);
   }
   clear();
 }
