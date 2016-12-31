@@ -62,7 +62,7 @@ void Lixie::show(){
 }
 
 // set all on color ------------------------------------
-void Lixie::color_on_rgb(byte r, byte g, byte b){
+void Lixie::color_on(byte r, byte g, byte b){
   for(byte i = 0; i < NUM_DIGITS; i++){
 	colors[i].r = r;
 	colors[i].g = g;
@@ -70,25 +70,25 @@ void Lixie::color_on_rgb(byte r, byte g, byte b){
   }
 }
 
-void Lixie::color_on_rgb(CRGB c){
+void Lixie::color_on(CRGB c){
   for(byte i = 0; i < NUM_DIGITS; i++){
     colors[i] = c;
   }
 }
 
 // set index on color ------------------------------------
-void Lixie::color_on_rgb(byte r, byte g, byte b, byte index){
+void Lixie::color_on(byte r, byte g, byte b, byte index){
   colors[index].r = r;
   colors[index].g = g;
   colors[index].b = b;
 }
 
-void Lixie::color_on_rgb(CRGB c, byte index){
+void Lixie::color_on(CRGB c, byte index){
   colors[index] = c;
 }
 
 // set all off color -------------------------------------
-void Lixie::color_off_rgb(byte r, byte g, byte b){
+void Lixie::color_off(byte r, byte g, byte b){
   for(byte i = 0; i < NUM_DIGITS; i++){
 	colors_off[i].r = r;
 	colors_off[i].g = g;
@@ -96,20 +96,20 @@ void Lixie::color_off_rgb(byte r, byte g, byte b){
   }
 }
 
-void Lixie::color_off_rgb(CRGB c){
+void Lixie::color_off(CRGB c){
   for(byte i = 0; i < NUM_DIGITS; i++){
     colors_off[i] = c;
   }
 }
 
 // set index color off -----------------------------------
-void Lixie::color_off_rgb(byte r, byte g, byte b, byte index){
+void Lixie::color_off(byte r, byte g, byte b, byte index){
   colors_off[index].r = r;
   colors_off[index].g = g;
   colors_off[index].b = b;
 }
 
-void Lixie::color_off_rgb(CRGB c, byte index){
+void Lixie::color_off(CRGB c, byte index){
   colors_off[index] = c;
 }
 
