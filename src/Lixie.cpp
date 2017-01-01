@@ -241,7 +241,7 @@ void Lixie::print_binary() {
 	Serial.println();
 }
 
-uint8_t Lixie::get_numdigits() const{
+const uint8_t Lixie::get_numdigits(){
 	return NUM_DIGITS;
 }
 
