@@ -128,39 +128,10 @@ byte char_to_number(char input){
 }
 
 bool char_is_number(char input){
-	if(input == '0'){
+	if(input <= 57 && input >= 48) // if between ASCII '9' and '0'
 		return true;
-	}
-	else if(input == '1'){
-		return true;
-	}
-	else if(input == '2'){
-		return true;
-	}
-	else if(input == '3'){
-		return true;
-	}
-	else if(input == '4'){
-		return true;
-	}
-	else if(input == '5'){
-		return true;
-	}
-	else if(input == '6'){
-		return true;
-	}
-	else if(input == '7'){
-		return true;
-	}
-	else if(input == '8'){
-		return true;
-	}
-	else if(input == '9'){
-		return true;
-	}
-	else{
+	else
 		return false;
-	}
 }
 
 void Lixie::write(char* input){
