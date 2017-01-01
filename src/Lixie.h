@@ -18,16 +18,16 @@ class Lixie{
 		void begin();
 		void clear(bool show_change = true);
 
-		void write_int(float input);
+		void write(int input);
+		void write(uint32_t input);
+		void write(char* input);
+		
 		void push_digit(byte number);
 		void write_digit(byte input, byte index);
 
-		void write_string_f(char* input, byte len);
-		void write_char(char input, byte index);
-
 		void show();
 		void print_binary();
-		uint8_t get_numdigits() const;
+		const uint8_t get_numdigits();
 		bool maxed_out(float input);
 
 		void color_on(byte r, byte g, byte b);
