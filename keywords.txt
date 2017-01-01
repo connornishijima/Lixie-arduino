@@ -11,14 +11,13 @@
 ###################################
 
 begin	KEYWORD2
-write_string	KEYWORD2
-write_int	KEYWORD2
+write	KEYWORD2
 push_digit	KEYWORD2
 write_digit	KEYWORD2
-write_char	KEYWORD2
 show	KEYWORD2
 print_binary	KEYWORD2
 get_numdigits	KEYWORD2
+maxed_out	KEYWORD2
 color_on	KEYWORD2
 color_off	KEYWORD2
 clear	KEYWORD2
