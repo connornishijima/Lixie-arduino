@@ -16,7 +16,7 @@ class Lixie{
 	public:
 		Lixie();
 		void begin();
-		void clear();
+		void clear(bool show_change = true);
 
 		void write_int(float input);
 		void push_digit(byte number);
