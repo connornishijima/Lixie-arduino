@@ -59,9 +59,9 @@ Clears all displays, all lights off.
 
 **lix.write**(uint32_t **input** OR char* **input**);
 
-***uint32_t:*** Clears the displays, and pushes in a multi-digit integer as in: 2016
+    uint32_t: Clears the displays, and pushes in a multi-digit integer as in: 2016
 
-***char*:*** Clears the displays, and pushes in a char array as in: "2016". This ignores any non-numeric chars in the string, allowing you to send "12:52:47 PM" and have the displays show "12 52 47" for a clock.
+    char*: Clears the displays, and pushes in a char array as in: "2016". This ignores any non-numeric chars in the string, allowing you to send "12:52:47 PM" and have the displays show "12 52 47" for a clock.
 
 **lix.color_on**(byte **r**, byte **g**, byte **b**);
 
