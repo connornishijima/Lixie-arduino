@@ -166,6 +166,22 @@ void Lixie::write(int input){
 	write(uint32_t(input));
 }
 
+void Lixie::write(long input){
+	write(uint32_t(input));
+}
+
+void Lixie::write(int8_t input){
+	write(uint32_t(input));
+}
+
+void Lixie::write(float input){
+	write(uint32_t(input));
+}
+
+void Lixie::write(double input){
+	write(uint32_t(input));
+}
+
 void Lixie::write_digit(byte input, byte index){
 	uint16_t start = (index*20);
 
