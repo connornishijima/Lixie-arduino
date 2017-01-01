@@ -35,7 +35,7 @@ void Lixie::begin() {
 	clear();
 }
 
-void Lixie::clear(bool show_change = true) {
+void Lixie::clear(bool show_change) {
 	for (uint16_t i = 0; i < NUM_LEDS; i++) {
 		setBit(i,0);
 	}
