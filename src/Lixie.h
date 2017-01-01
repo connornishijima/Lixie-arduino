@@ -10,8 +10,6 @@ Released under the GPLv3 license.
 #include "Arduino.h"
 #include "FastLED.h"
 
-#define write_string(input) write_string_f(input, sizeof(input)-1);
-
 class Lixie{
 	public:
 		Lixie();
