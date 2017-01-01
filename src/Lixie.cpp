@@ -114,82 +114,17 @@ void Lixie::color_off(CRGB c, byte index){
 	colors_off[index] = c;
 }
 
-byte get_size(uint16_t input){
+byte get_size(uint32_t input){
 	byte places = 0;
-	uint16_t multiply = 10;
-	bool done = false;
-
-	if(input >= 0){
+	while(input > 0){
 		places++;
+		input = input / 10;
 	}
-
-	while(done == false){
-		if(input >= multiply){
-			places++;
-			multiply *= 10;
-		}
-		else{
-			done = true;
-		}
-	}
-
 	return places;
 }
 
-void Lixie::write_int(float input){
-	clear(false);
-
-	byte places = get_size(input);
-
-	for(byte i = 0; i < places; i++){
-		while (input >= 10) {
-			input = input / 10.0;
-		}
-
-		uint16_t input_ones = uint16_t(input);
-		push_digit(input_ones);
-		float input_next = float(input) - input_ones;
-		input = (input_next*10.0)+0.0005; // Floating point numbers are weirdly inaccurate on Arduino.
-										  // I fucking dare you to remove that "0.0005" there.
-	}
-
-	show();
-}
-
-void Lixie::write_digit(byte input, byte index){
-	uint16_t start = (index*20);
-
-	for(uint16_t i = start; i < start+20; i++){
-		setBit(i,0);
-	}
-
-	uint16_t L1 = start+addresses[input];
-	uint16_t L2 = start+addresses[input] + 10;
-
-	setBit(L1,1);
-	setBit(L2,1);
-
-	show();
-}
-
-void Lixie::push_digit(byte number) {
-	if (NUM_DIGITS > 1) {
-		for (uint16_t i = NUM_LEDS - 1; i >= 20; i--) {
-			setBit(i,getBit(i - 20));
-		}
-		for (uint16_t i = 0; i < 20; i++) {
-			setBit(i,0);
-		}
-	}
-	else {
-		clear(false);
-	}
-
-	uint16_t L1 = addresses[number];
-	uint16_t L2 = addresses[number] + 10;
-
-	setBit(L1,1);
-	setBit(L2,1);
+byte char_to_number(char input){
+	return byte(input-48); // convert ascii index to real number
 }
 
 bool char_is_number(char input){
@@ -228,23 +163,72 @@ bool char_is_number(char input){
 	}
 }
 
-byte char_to_number(char input){
-	return byte(input-48); // convert ascii index to real number
+void Lixie::write(char* input){
+	char temp[20] = "";
+	byte index = 0;
+	for(byte i = 0; i < 20; i++){
+		if(char_is_number(input[i])){
+			temp[index] = input[i];
+			index++;
+		}
+	}
+	uint32_t output = atol(temp);
+	write(output);
 }
 
-void Lixie::write_string_f(char* input, byte len){
-	for(byte i = 0; i < len; i++){
-		if(char_is_number(input[i]) == true){
-			push_digit(char_to_number(input[i]));
+void Lixie::write(uint32_t input){
+	char t[20] = "";
+	sprintf(t,"%lu",input);
+	clear(false);
+	if(input != 0){
+		for(byte i = 0; i < get_size(input); i++){
+			push_digit(char_to_number(t[i]));
 		}
+	}
+	else{
+		push_digit(0);
 	}
 	show();
 }
 
-void Lixie::write_char(char input, byte index){
-	if(char_is_number(input) == true){
-		write_digit(char_to_number(input),index);
+void Lixie::write(int input){
+	write(uint32_t(input));
+}
+
+void Lixie::write_digit(byte input, byte index){
+	uint16_t start = (index*20);
+
+	for(uint16_t i = start; i < start+20; i++){
+		setBit(i,0);
 	}
+
+	uint16_t L1 = start+addresses[input];
+	uint16_t L2 = start+addresses[input] + 10;
+
+	setBit(L1,1);
+	setBit(L2,1);
+
+	show();
+}
+
+void Lixie::push_digit(byte number) {
+	if (NUM_DIGITS > 1) {
+		for (uint16_t i = NUM_LEDS - 1; i >= 20; i--) {
+			setBit(i,getBit(i - 20));
+		}
+		for (uint16_t i = 0; i < 20; i++) {
+			setBit(i,0);
+		}
+	}
+	else {
+		clear(false);
+	}
+
+	uint16_t L1 = addresses[number];
+	uint16_t L2 = addresses[number] + 10;
+
+	setBit(L1,1);
+	setBit(L2,1);
 }
 
 void Lixie::print_binary() {
