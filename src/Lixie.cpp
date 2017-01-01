@@ -35,9 +35,12 @@ void Lixie::begin() {
 	clear();
 }
 
-void Lixie::clear() {
+void Lixie::clear(bool show_change = true) {
 	for (uint16_t i = 0; i < NUM_LEDS; i++) {
 		setBit(i,0);
+	}
+	if(show_change == true){
+		show();
 	}
 }
 
@@ -134,7 +137,7 @@ byte get_size(uint16_t input){
 }
 
 void Lixie::write_int(float input){
-	clear();
+	clear(false);
 
 	byte places = get_size(input);
 
@@ -179,7 +182,7 @@ void Lixie::push_digit(byte number) {
 		}
 	}
 	else {
-		clear();
+		clear(false);
 	}
 
 	uint16_t L1 = addresses[number];
