@@ -42,7 +42,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
     }
     
     void loop() {
-      lix.write_int( millis() );       // Write millis() to the displays
+      lix.write( millis() );       // Write millis() to the displays
       delay(1);
     }
 
@@ -53,17 +53,15 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 
 Inititalizes the underlying FastLED library and sets up variables like the digit colors.
 
-**lix.clear**();
+**lix.blank**();
 
 Clears all displays, all lights off.
 
-**lix.write_int**(unsigned int **input**);
+**lix.write**(uint32_t **input** OR char* **input**);
 
-Clears the displays, and pushes in a multi-digit integer as in: 2016
+***uint32_t:*** Clears the displays, and pushes in a multi-digit integer as in: 2016
 
-**lix.write_string**(char\* **input**);
-
-Clears the displays, and pushes in a char array as in: "2016". This ignores any non-numeric chars in the string, allowing you to send "12:52:47 PM" and have the displays show "12 52 47" for a clock.
+***char*:*** Clears the displays, and pushes in a char array as in: "2016". This ignores any non-numeric chars in the string, allowing you to send "12:52:47 PM" and have the displays show "12 52 47" for a clock.
 
 **lix.color_on**(byte **r**, byte **g**, byte **b**);
 
