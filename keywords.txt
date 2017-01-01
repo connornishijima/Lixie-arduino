@@ -21,6 +21,7 @@ maxed_out	KEYWORD2
 color_on	KEYWORD2
 color_off	KEYWORD2
 clear	KEYWORD2
+lix KEYWORD2
 
 ###################################
 # Constants (LITERAL1)
