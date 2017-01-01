@@ -166,9 +166,6 @@ void Lixie::write(int input){
 	write(uint32_t(input));
 }
 
-void Lixie::write(uint16_t input){
-	write(uint32_t(input));
-}
 
 void Lixie::write(long input){
 	write(uint32_t(input));
