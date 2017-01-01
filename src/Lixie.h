@@ -25,7 +25,7 @@ class Lixie{
 
 		void show();
 		void print_binary();
-		const uint8_t get_numdigits();
+		uint8_t get_numdigits() const;
 		bool maxed_out(float input);
 
 		void color_on(byte r, byte g, byte b);
