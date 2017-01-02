@@ -17,11 +17,11 @@ CRGB colors_off[NUM_DIGITS];
 
 Lixie::Lixie(){}
 
-void setBit(uint16_t pos, byte val){
+void Lixie::setBit(uint16_t pos, byte val){
 	bitWrite(led_states[(pos/8)], pos % 8, val);
 }
 
-byte getBit(uint16_t pos){
+byte Lixie::getBit(uint16_t pos){
 	return bitRead(led_states[(pos/8)], pos % 8);
 }
 
@@ -114,7 +114,7 @@ void Lixie::color_off(CRGB c, byte index){
 	colors_off[index] = c;
 }
 
-byte get_size(uint32_t input){
+byte Lixie::get_size(uint32_t input){
 	byte places = 0;
 	while(input > 0){
 		places++;
@@ -123,11 +123,11 @@ byte get_size(uint32_t input){
 	return places;
 }
 
-byte char_to_number(char input){
+byte Lixie::char_to_number(char input){
 	return byte(input-48); // convert ascii index to real number
 }
 
-bool char_is_number(char input){
+bool Lixie::char_is_number(char input){
 	if(input <= 57 && input >= 48) // if between ASCII '9' and '0'
 		return true;
 	else
