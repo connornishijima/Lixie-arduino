@@ -21,7 +21,7 @@ void Lixie::setBit(uint16_t pos, byte val){
 	bitWrite(led_states[(pos/8)], pos % 8, val);
 }
 
-byte Lixie::getBit(uint16_t pos){
+byte Lixie::getBit(uint16_t pos) const{
 	return bitRead(led_states[(pos/8)], pos % 8);
 }
 
@@ -114,7 +114,7 @@ void Lixie::color_off(CRGB c, byte index){
 	colors_off[index] = c;
 }
 
-byte Lixie::get_size(uint32_t input){
+byte Lixie::get_size(uint32_t input) const{
 	byte places = 0;
 	while(input > 0){
 		places++;
@@ -123,11 +123,11 @@ byte Lixie::get_size(uint32_t input){
 	return places;
 }
 
-byte Lixie::char_to_number(char input){
+byte Lixie::char_to_number(char input) const{
 	return byte(input-48); // convert ascii index to real number
 }
 
-bool Lixie::char_is_number(char input){
+bool Lixie::char_is_number(char input) const{
 	if(input <= 57 && input >= 48) // if between ASCII '9' and '0'
 		return true;
 	else

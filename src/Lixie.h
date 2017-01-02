@@ -47,10 +47,10 @@ class Lixie{
 		void color_off(CRGB c, byte index);
 	private:
 		void setBit(uint16_t pos, byte val);
-		byte getBit(uint16_t pos);
-		byte get_size(uint32_t input);
-		byte char_to_number(char input);
-		bool char_is_number(char input);
+		byte getBit(uint16_t pos) const;
+		byte get_size(uint32_t input) const;
+		byte char_to_number(char input) const;
+		bool char_is_number(char input) const;
 };
 
 #endif
