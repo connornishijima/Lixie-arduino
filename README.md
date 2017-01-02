@@ -53,7 +53,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 
 Inititalizes the underlying FastLED library and sets up variables like the digit colors.
 
-**lix.blank**();
+**lix.clear**();
 
 Clears all displays, all lights off.
 
