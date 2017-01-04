@@ -248,5 +248,5 @@ bool Lixie::maxed_out(float input){
 }
 
 void Lixie::max_power(byte volts, uint16_t milliamps){
-	FastLED.setMaxPowerInVoltsAndMilliamps(volts,milliamps);
+	FastLED.setMaxPowerInVoltsAndMilliamps(volts,milliamps); 
 }
