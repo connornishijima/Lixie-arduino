@@ -1,8 +1,9 @@
-LIXIE for ARDUINO CHANGE LOG:
-----------------------------
-# Started changelog, should have done this sooner! (1/4/17)
+# LIXIE for ARDUINO CHANGE LOG:
+Started changelog, should have done this sooner! (1/4/17)
+---------------------------------------------------------
 
-# Added max_power(volts,milliamps) function: (1/4/17)
+Added max_power(volts,milliamps) function: (1/4/17)
+---------------------------------------------------
 
 I discovered that FastLED has an option to limit global strip brightness based on the max wattage you'd like to consume. This is amazing! By default, the Lixie library will limit the current consumption to 5W, or 1A @ 5V. Under normal use, each digit will only consume a maximum ~120mA by having two LEDs lighting a digit with full white. You could run 8 digits without hitting the 1A cap.
 		
@@ -12,7 +13,8 @@ I discovered that FastLED has an option to limit global strip brightness based o
 
 Be sure to leave some modest headroom for other things like the microcontroller doing all the work!
 
-# Added color_balance(r_adj, g_adj, b_adj) function: (1/4/17)
+Added color_balance(r_adj, g_adj, b_adj) function: (1/4/17)
+-----------------------------------------------------------
 
 By default, CRGB(255,255,255) on a WS2812B produces a very blue-shifted, cold white. I don't think you can call it white if it's light blue! I've added these default color balance values:
 
