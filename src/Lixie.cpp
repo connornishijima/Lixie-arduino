@@ -6,7 +6,7 @@ Released under the GPLv3 license.
 
 #include "Lixie.h"
 
-byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
+static constexpr byte Lixie::addresses[];
 
 Lixie::Lixie(uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20), DataPin(pin){
 	leds = new CRGB[NumLEDs];

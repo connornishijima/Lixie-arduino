@@ -46,6 +46,7 @@ class Lixie{
 		void color_off(byte r, byte g, byte b, byte index);
 		void color_off(CRGB c, byte index);
 	private:
+		static constexpr byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
 		const uint8_t NumDigits;
 		const uint16_t NumLEDs;
 		const uint8_t DataPin;
