@@ -5,17 +5,15 @@ Released under the GPLv3 license.
 */
 
 #include "Lixie.h"
-#include "config.h"
 
-#define NUM_LEDS NUM_DIGITS * 24
-CRGB leds[NUM_LEDS];
-
-byte led_states[NUM_LEDS/8];
 byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
-CRGB colors[NUM_DIGITS];
-CRGB colors_off[NUM_DIGITS];
 
 Lixie::Lixie(uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20), DataPin(pin){
+	leds = new CRGB[NumLEDs];
+	led_states = new byte[NumDigits * 3];
+	colors = new CRGB[NumDigits];
+	colors_off = new CRGB[NumDigits];
+  
 	build_controller();
 }
 
@@ -28,9 +26,8 @@ byte Lixie::getBit(uint16_t pos) const{
 }
 
 void Lixie::begin() {
-	//FastLED.addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
 	FastLED.show();
-	for(byte i = 0; i < NUM_DIGITS; i++){
+	for(byte i = 0; i < NumDigits; i++){
 		colors[i] = CRGB(255,255,255);
 		colors_off[i] = CRGB(0,0,0);
 	}
@@ -38,7 +35,7 @@ void Lixie::begin() {
 }
 
 void Lixie::clear(bool show_change) {
-	for (uint16_t i = 0; i < NUM_LEDS; i++) {
+	for (uint16_t i = 0; i < NumLEDs; i++) {
 		setBit(i,0);
 	}
 	if(show_change == true){
@@ -47,7 +44,7 @@ void Lixie::clear(bool show_change) {
 }
 
 void Lixie::show(){
-	for(uint16_t i = 0; i < NUM_LEDS; i++){
+	for(uint16_t i = 0; i < NumLEDs; i++){
 		if(getBit(i) == 1){
 			byte r = colors[i/20].r;
 			byte g = colors[i/20].g;
@@ -66,7 +63,7 @@ void Lixie::show(){
 
 // set all on color ------------------------------------
 void Lixie::color_on(byte r, byte g, byte b){
-	for(byte i = 0; i < NUM_DIGITS; i++){
+	for(byte i = 0; i < NumDigits; i++){
 		colors[i].r = r;
 		colors[i].g = g;
 		colors[i].b = b;
@@ -74,7 +71,7 @@ void Lixie::color_on(byte r, byte g, byte b){
 }
 
 void Lixie::color_on(CRGB c){
-	for(byte i = 0; i < NUM_DIGITS; i++){
+	for(byte i = 0; i < NumDigits; i++){
 		colors[i] = c;
 	}
 }
@@ -92,7 +89,7 @@ void Lixie::color_on(CRGB c, byte index){
 
 // set all off color -------------------------------------
 void Lixie::color_off(byte r, byte g, byte b){
-	for(byte i = 0; i < NUM_DIGITS; i++){
+	for(byte i = 0; i < NumDigits; i++){
 		colors_off[i].r = r;
 		colors_off[i].g = g;
 		colors_off[i].b = b;
@@ -100,7 +97,7 @@ void Lixie::color_off(byte r, byte g, byte b){
 }
 
 void Lixie::color_off(CRGB c){
-	for(byte i = 0; i < NUM_DIGITS; i++){
+	for(byte i = 0; i < NumDigits; i++){
 		colors_off[i] = c;
 	}
 }
@@ -206,8 +203,8 @@ void Lixie::write_digit(byte input, byte index){
 }
 
 void Lixie::push_digit(byte number) {
-	if (NUM_DIGITS > 1) {
-		for (uint16_t i = NUM_LEDS - 1; i >= 20; i--) {
+	if (NumDigits > 1) {
+		for (uint16_t i = NumLEDs - 1; i >= 20; i--) {
 			setBit(i,getBit(i - 20));
 		}
 		for (uint16_t i = 0; i < 20; i++) {
@@ -226,7 +223,7 @@ void Lixie::push_digit(byte number) {
 }
 
 void Lixie::print_binary() {
-	for (uint16_t i = 0; i < NUM_LEDS; i++) {
+	for (uint16_t i = 0; i < NumLEDs; i++) {
 		Serial.print(getBit(i));
 		if ((i + 1) % 20 == 0 && i != 0) {
 			Serial.print('\t');
@@ -236,11 +233,11 @@ void Lixie::print_binary() {
 }
 
 uint8_t Lixie::get_numdigits() const{
-	return NUM_DIGITS;
+	return NumDigits;
 }
 
 bool Lixie::maxed_out(float input){
-	if(input >= pow(10,NUM_DIGITS)){ // If input > number that can be displayed
+	if(input >= pow(10,NumDigits)){ // If input > number that can be displayed
 		return false;
 	}
 	else{
@@ -251,46 +248,46 @@ bool Lixie::maxed_out(float input){
 void Lixie::build_controller(){
 	switch (DataPin){
 		case 0:
-			FastLED.addLeds<WS2811, 0, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 0, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 1:
-			FastLED.addLeds<WS2811, 1, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 1, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 2:
-			FastLED.addLeds<WS2811, 2, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 2, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 3:
-			FastLED.addLeds<WS2811, 3, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 3, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 4:
-			FastLED.addLeds<WS2811, 4, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 4, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 5:
-			FastLED.addLeds<WS2811, 5, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 5, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 6:
-			FastLED.addLeds<WS2811, 6, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 6, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 7:
-			FastLED.addLeds<WS2811, 7, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 7, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 8:
-			FastLED.addLeds<WS2811, 8, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 8, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 9:
-			FastLED.addLeds<WS2811, 9, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 9, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 10:
-			FastLED.addLeds<WS2811, 10, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 10, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 11:
-			FastLED.addLeds<WS2811, 11, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 11, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 12:
-			FastLED.addLeds<WS2811, 12, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 12, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 		case 13:
-			FastLED.addLeds<WS2811, 13, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			FastLED.addLeds<WS2811, 13, GRB>(leds, NumLEDs).setCorrection(TypicalLEDStrip);
 			break;
 	}
 }

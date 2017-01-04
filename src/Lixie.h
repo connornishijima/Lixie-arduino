@@ -49,6 +49,10 @@ class Lixie{
 		const uint8_t NumDigits;
 		const uint16_t NumLEDs;
 		const uint8_t DataPin;
+		CRGB *leds;
+		CRGB *colors;
+		CRGB *colors_off;
+		byte *led_states;
 		void setBit(uint16_t pos, byte val);
 		byte getBit(uint16_t pos) const;
 		byte get_size(uint32_t input) const;
