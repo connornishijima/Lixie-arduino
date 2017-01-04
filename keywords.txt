@@ -18,7 +18,7 @@ show	KEYWORD2
 print_binary	KEYWORD2
 get_numdigits	KEYWORD2
 maxed_out	KEYWORD2
-color_on	KEYWORD2
+color	KEYWORD2
 color_off	KEYWORD2
 clear	KEYWORD2
 lix KEYWORD2
