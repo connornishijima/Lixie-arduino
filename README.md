@@ -38,7 +38,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
     
     void setup() {
       lix.begin();                     // Initialize LEDs
-      lix.color_on(0,255,255);   // Set color with RGB (CYAN)
+      lix.color(0,255,255);   // Set color with RGB (CYAN)
     }
     
     void loop() {
@@ -63,7 +63,7 @@ Clears all displays, all lights off.
 
     char*: Clears the displays, and pushes in a char array as in: "2016". This ignores any non-numeric chars in the string, allowing you to send "12:52:47 PM" and have the displays show "12 52 47" for a clock.
 
-**lix.color_on**(byte **r**, byte **g**, byte **b**);
+**lix.color**(byte **r**, byte **g**, byte **b**);
 
 Sets the "on" color of the digits using RGB. This is the color of an active number in the display. (Default: 255,255,255)
 
