@@ -293,6 +293,5 @@ void Lixie::build_controller(uint8_t DataPin){
 			FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
 			break;
 	}
-  FastLED.setCorrection(TypicalLEDStrip);
 }
 
