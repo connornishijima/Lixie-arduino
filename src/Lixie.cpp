@@ -50,15 +50,15 @@ void Lixie::clear(bool show_change) {
 void Lixie::show(){
 	for(uint16_t i = 0; i < NUM_LEDS; i++){
 		if(getBit(i) == 1){
-			byte r = colors[i/20].r*color_bal[0];
-			byte g = colors[i/20].g*color_bal[1];
-			byte b = colors[i/20].b*color_bal[2];
+			byte r = colors[i/20].r;
+			byte g = colors[i/20].g;
+			byte b = colors[i/20].b;
 			leds[i] = CRGB(r,g,b);
 		}
 		else{
-			byte r = colors_off[i/20].r*color_bal[0];
-			byte g = colors_off[i/20].g*color_bal[1];
-			byte b = colors_off[i/20].b*color_bal[2];
+			byte r = colors_off[i/20].r;
+			byte g = colors_off[i/20].g;
+			byte b = colors_off[i/20].b;
 			leds[i] = CRGB(r,g,b);
 		}
 	}
