@@ -1,6 +1,14 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Removed 'config.h' and added support for multiple instances (1/4/17)
+-----------------------------------------------------------
+
+I removed the config file and changed the class to configure the data pin and number of Lixies in the constructor. This should make initial setup easier, at the cost of dynamic data allocation at runtime.
+
+This update also adds support for multiple Lixie groups! You can now drive multiple Lixie sets independently from the same microcontroller.
+
+
 Moved color balance math from show() to color()/color_off()
 -----------------------------------------------------------
 
