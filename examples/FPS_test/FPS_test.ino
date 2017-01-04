@@ -5,7 +5,7 @@ int MAX_NUMBER = 500; // Number of times to write to the displays
 
 void setup() {
   lix.begin(); // Initialize LEDs
-  lix.color_on(255, 255, 0); // Yellow while testing
+  lix.color(255, 255, 0); // Yellow while testing
 
   int count = 0;
   unsigned long tStart = micros(); // Start time
@@ -16,7 +16,7 @@ void setup() {
   unsigned long tEnd = micros(); // End time
   
   int FPS = 1000000 / ((tEnd - tStart) / MAX_NUMBER); // Get FPS by how many microseconds all writes took
-  lix.color_on(0, 255, 0); // Green when done
+  lix.color(0, 255, 0); // Green when done
   lix.write(FPS);          // Display FPS
 }
 
