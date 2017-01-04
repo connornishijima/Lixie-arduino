@@ -254,7 +254,7 @@ void Lixie::max_power(byte volts, uint16_t milliamps){
 }
 
 void Lixie::color_balance(float r_adj,float g_adj,float b_adj){
-	color_bal[0] = r_adj,
-	color_bal[1] = g_adj,
-	color_bal[2] = b_adj,
+	color_bal[0] = r_adj;
+	color_bal[1] = g_adj;
+	color_bal[2] = b_adj;
 }
