@@ -27,11 +27,9 @@ void setup() {
   lix.begin(); // Initialize LEDs
   lix.color(255, 255, 0); // Yellow while testing
 
-  uint32_t count = 0;
   unsigned long tStart = micros(); // Start time
-  while (count < MAX_NUMBER) {
+  for(uint32_t count = 0; count < MAX_NUMBER; count++) {
     lix.write(count);
-    count++;
   }
   unsigned long tEnd = micros(); // End time
   
