@@ -7,10 +7,10 @@ Released under the GPLv3 license.
 #include "Lixie.h"
 #include "config.h"
 
-#define NUM_LEDS NUM_DIGITS * 24
+#define NUM_LEDS NUM_DIGITS * 20
 CRGB leds[NUM_LEDS];
 
-byte led_states[NUM_LEDS/8];
+byte led_states[NUM_DIGITS*3];
 byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
 CRGB colors[NUM_DIGITS];
 CRGB colors_off[NUM_DIGITS];
