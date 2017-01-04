@@ -47,6 +47,9 @@ class Lixie{
 
 		void color_off(byte r, byte g, byte b, byte index);
 		void color_off(CRGB c, byte index);
+		
+		void color_balance(float r_adj,float g_adj,float b_adj);
+
 	private:
 		void setBit(uint16_t pos, byte val);
 		byte getBit(uint16_t pos) const;
