@@ -49,7 +49,6 @@ class Lixie{
 		static constexpr byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
 		const uint8_t NumDigits;
 		const uint16_t NumLEDs;
-		const uint8_t DataPin;
 		CRGB *leds;
 		CRGB *colors;
 		CRGB *colors_off;
@@ -59,7 +58,7 @@ class Lixie{
 		byte get_size(uint32_t input) const;
 		byte char_to_number(char input) const;
 		bool char_is_number(char input) const;
-		void build_controller();
+		void build_controller(uint8_t DataPin);
 };
 
 #endif

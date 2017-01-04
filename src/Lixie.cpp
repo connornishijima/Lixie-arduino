@@ -11,13 +11,13 @@ Released under the GPLv3 license.
 
 static constexpr byte Lixie::addresses[];
 
-Lixie::Lixie(uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20), DataPin(pin){
+Lixie::Lixie(uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20){
 	leds = new CRGB[NumLEDs];
 	led_states = new byte[NumDigits * 3];
 	colors = new CRGB[NumDigits];
 	colors_off = new CRGB[NumDigits];
   
-	build_controller();
+	build_controller(pin);
 }
 
 void Lixie::setBit(uint16_t pos, byte val){
@@ -248,7 +248,7 @@ bool Lixie::maxed_out(float input){
 	}
 }
 
-void Lixie::build_controller(){
+void Lixie::build_controller(uint8_t DataPin){
 	switch (DataPin){
 		case 0:
 			FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
