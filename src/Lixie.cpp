@@ -6,6 +6,9 @@ Released under the GPLv3 license.
 
 #include "Lixie.h"
 
+#define LED_TYPE    WS2812B
+#define COLOR_ORDER GRB
+
 static constexpr byte Lixie::addresses[];
 
 Lixie::Lixie(uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20), DataPin(pin){
@@ -248,46 +251,46 @@ bool Lixie::maxed_out(float input){
 void Lixie::build_controller(){
 	switch (DataPin){
 		case 0:
-			FastLED.addLeds<WS2811, 0, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 1:
-			FastLED.addLeds<WS2811, 1, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 1, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 2:
-			FastLED.addLeds<WS2811, 2, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 2, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 3:
-			FastLED.addLeds<WS2811, 3, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 3, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 4:
-			FastLED.addLeds<WS2811, 4, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 4, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 5:
-			FastLED.addLeds<WS2811, 5, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 5, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 6:
-			FastLED.addLeds<WS2811, 6, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 6, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 7:
-			FastLED.addLeds<WS2811, 7, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 7, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 8:
-			FastLED.addLeds<WS2811, 8, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 8, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 9:
-			FastLED.addLeds<WS2811, 9, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 9, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 10:
-			FastLED.addLeds<WS2811, 10, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 10, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 11:
-			FastLED.addLeds<WS2811, 11, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 11, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 12:
-			FastLED.addLeds<WS2811, 12, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 12, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 13:
-			FastLED.addLeds<WS2811, 13, GRB>(leds, NumLEDs);
+			FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
 			break;
 	}
   FastLED.setCorrection(TypicalLEDStrip);
