@@ -36,11 +36,11 @@ class Lixie{
 		uint8_t get_numdigits() const;
 		bool maxed_out(float input);
 
-		void color_on(byte r, byte g, byte b);
-		void color_on(CRGB c);
+		void color(byte r, byte g, byte b);
+		void color(CRGB c);
 
-		void color_on(byte r, byte g, byte b, byte index);
-		void color_on(CRGB c, byte index);
+		void color(byte r, byte g, byte b, byte index);
+		void color(CRGB c, byte index);
 
 		void color_off(byte r, byte g, byte b);
 		void color_off(CRGB c);
