@@ -1,5 +1,5 @@
-LIXIE for ARDUINO CHANGELOG:
-
+LIXIE for ARDUINO CHANGE LOG:
+----------------------------
 # 1/4/17:
 **- Started changelog, should have done this sooner!**
 
