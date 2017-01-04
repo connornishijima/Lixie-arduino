@@ -12,7 +12,7 @@ Released under the GPLv3 license.
 
 class Lixie{
 	public:
-		Lixie();
+		Lixie(uint8_t pin, uint8_t nDigits);
 		void begin();
 		void clear(bool show_change = true);
 
@@ -46,6 +46,9 @@ class Lixie{
 		void color_off(byte r, byte g, byte b, byte index);
 		void color_off(CRGB c, byte index);
 	private:
+		const uint8_t NumDigits;
+		const uint16_t NumLEDs;
+		const uint8_t DataPin;
 		void setBit(uint16_t pos, byte val);
 		byte getBit(uint16_t pos) const;
 		byte get_size(uint32_t input) const;

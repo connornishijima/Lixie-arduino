@@ -15,7 +15,8 @@ byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
 CRGB colors[NUM_DIGITS];
 CRGB colors_off[NUM_DIGITS];
 
-Lixie::Lixie(){}
+Lixie::Lixie(uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20), DataPin(pin){
+}
 
 void Lixie::setBit(uint16_t pos, byte val){
 	bitWrite(led_states[(pos/8)], pos % 8, val);
