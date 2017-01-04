@@ -15,6 +15,8 @@ byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
 CRGB colors[NUM_DIGITS];
 CRGB colors_off[NUM_DIGITS];
 
+float color_bal[3] = {1.00, 0.94, 0.59};
+
 Lixie::Lixie(){}
 
 void Lixie::setBit(uint16_t pos, byte val){
@@ -48,15 +50,15 @@ void Lixie::clear(bool show_change) {
 void Lixie::show(){
 	for(uint16_t i = 0; i < NUM_LEDS; i++){
 		if(getBit(i) == 1){
-			byte r = colors[i/20].r;
-			byte g = colors[i/20].g;
-			byte b = colors[i/20].b;
+			byte r = colors[i/20].r*color_bal[0];
+			byte g = colors[i/20].g*color_bal[1];
+			byte b = colors[i/20].b*color_bal[2];
 			leds[i] = CRGB(r,g,b);
 		}
 		else{
-			byte r = colors_off[i/20].r;
-			byte g = colors_off[i/20].g;
-			byte b = colors_off[i/20].b;
+			byte r = colors_off[i/20].r*color_bal[0];
+			byte g = colors_off[i/20].g*color_bal[1];
+			byte b = colors_off[i/20].b*color_bal[2];
 			leds[i] = CRGB(r,g,b);
 		}
 	}
@@ -249,4 +251,10 @@ bool Lixie::maxed_out(float input){
 
 void Lixie::max_power(byte volts, uint16_t milliamps){
 	FastLED.setMaxPowerInVoltsAndMilliamps(volts,milliamps); 
+}
+
+void Lixie::color_balance(float r_adj,float g_adj,float b_adj){
+	color_bal[0] = r_adj,
+	color_bal[1] = g_adj,
+	color_bal[2] = b_adj,
 }
