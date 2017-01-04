@@ -28,6 +28,7 @@ byte Lixie::getBit(uint16_t pos) const{
 void Lixie::begin() {
 	FastLED.addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
 	FastLED.show();
+	max_power(5,1000);
 	for(byte i = 0; i < NUM_DIGITS; i++){
 		colors[i] = CRGB(255,255,255);
 		colors_off[i] = CRGB(0,0,0);
@@ -244,4 +245,8 @@ bool Lixie::maxed_out(float input){
 	else{
 		return true;
 	}
+}
+
+void Lixie::max_power(byte volts, uint16_t milliamps){
+	FastLED.setMaxPowerInVoltsAndMilliamps(volts,milliamps);
 }
