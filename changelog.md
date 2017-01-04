@@ -1,6 +1,11 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Moved color balance math from show() to color()/color_off()
+-----------------------------------------------------------
+
+Since we're dealing with floating points, I moved the color balance adjustment math to the color() & color_off() functions, instead of being in show(). This way, the floating point math is potentially only done once, when the color is set.
+
 Shortened "color_on()" to "color()" (1/4/17)
 --------------------------------------
 
