@@ -1,6 +1,14 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Shortened "color_on()" to "color()" (1/4/17)
+--------------------------------------
+
+To make things a bit quicker to write, I changed the color_on() function to simply: color(). The two color setting functions are now:
+
+    color(r,g,b);
+    color_off(r,g,b);
+
 Added color_balance(r_adj, g_adj, b_adj) function: (1/4/17)
 -----------------------------------------------------------
 
