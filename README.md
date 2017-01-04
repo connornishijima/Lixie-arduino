@@ -34,7 +34,10 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 # Getting Started:
 
     #include "Lixie.h" // Include Lixie Library
-    Lixie lix;         // Set class nickname for faster coding
+    
+    #define DATA_PIN   13
+    #define NUM_LIXIES 4
+    Lixie lix(DATA_PIN, NUM_LIXIES); // Customize parameters to your setup
     
     void setup() {
       lix.begin();                     // Initialize LEDs
