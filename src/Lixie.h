@@ -28,6 +28,8 @@ class Lixie{
 	
 		void push_digit(byte number);
 		void write_digit(byte input, byte index);
+	
+		void max_power(byte volts, uint16_t milliamps);
 
 		void show();
 		void print_binary();
