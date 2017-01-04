@@ -23,6 +23,7 @@ color_off	KEYWORD2
 clear	KEYWORD2
 lix KEYWORD2
 max_power	KEYWORD2
+color_balance	KEYWORD2
 
 ###################################
 # Constants (LITERAL1)
