@@ -28,23 +28,28 @@ class Lixie{
 	
 		void push_digit(byte number);
 		void write_digit(byte input, byte index);
+	
+		void max_power(byte volts, uint16_t milliamps);
 
 		void show();
 		void print_binary();
 		uint8_t get_numdigits() const;
 		bool maxed_out(float input);
 
-		void color_on(byte r, byte g, byte b);
-		void color_on(CRGB c);
+		void color(byte r, byte g, byte b);
+		void color(CRGB c);
 
-		void color_on(byte r, byte g, byte b, byte index);
-		void color_on(CRGB c, byte index);
+		void color(byte r, byte g, byte b, byte index);
+		void color(CRGB c, byte index);
 
 		void color_off(byte r, byte g, byte b);
 		void color_off(CRGB c);
 
 		void color_off(byte r, byte g, byte b, byte index);
 		void color_off(CRGB c, byte index);
+		
+		void color_balance(float r_adj,float g_adj,float b_adj);
+
 	private:
 		static constexpr byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
 		const uint8_t NumDigits;
