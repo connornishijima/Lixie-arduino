@@ -15,7 +15,7 @@ byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
 CRGB colors[NUM_DIGITS];
 CRGB colors_off[NUM_DIGITS];
 
-float color_bal[3] = {1.00, 0.94, 0.59};
+float color_bal[3] = {1.00, 0.90, 0.65};
 
 Lixie::Lixie(){}
 
@@ -28,7 +28,7 @@ byte Lixie::getBit(uint16_t pos) const{
 }
 
 void Lixie::begin() {
-	FastLED.addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+	FastLED.addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS);
 	FastLED.show();
 	max_power(5,1000);
 	for(byte i = 0; i < NUM_DIGITS; i++){
