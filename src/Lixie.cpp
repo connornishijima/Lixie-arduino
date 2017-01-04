@@ -13,7 +13,7 @@ static constexpr byte Lixie::addresses[];
 
 Lixie::Lixie(uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20){
 	leds = new CRGB[NumLEDs];
-	led_states = new byte[NumDigits * 3];
+	led_states = new byte[NumDigits * 3]; // 24 bits for 20 LED states
 	colors = new CRGB[NumDigits];
 	colors_off = new CRGB[NumDigits];
   
