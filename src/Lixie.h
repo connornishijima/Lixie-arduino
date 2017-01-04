@@ -54,6 +54,7 @@ class Lixie{
 		byte get_size(uint32_t input) const;
 		byte char_to_number(char input) const;
 		bool char_is_number(char input) const;
+		void build_controller();
 };
 
 #endif

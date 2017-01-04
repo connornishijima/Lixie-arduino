@@ -16,6 +16,7 @@ CRGB colors[NUM_DIGITS];
 CRGB colors_off[NUM_DIGITS];
 
 Lixie::Lixie(uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20), DataPin(pin){
+	build_controller();
 }
 
 void Lixie::setBit(uint16_t pos, byte val){
@@ -27,7 +28,7 @@ byte Lixie::getBit(uint16_t pos) const{
 }
 
 void Lixie::begin() {
-	FastLED.addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+	//FastLED.addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
 	FastLED.show();
 	for(byte i = 0; i < NUM_DIGITS; i++){
 		colors[i] = CRGB(255,255,255);
@@ -246,3 +247,51 @@ bool Lixie::maxed_out(float input){
 		return true;
 	}
 }
+
+void Lixie::build_controller(){
+	switch (DataPin){
+		case 0:
+			FastLED.addLeds<WS2811, 0, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 1:
+			FastLED.addLeds<WS2811, 1, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 2:
+			FastLED.addLeds<WS2811, 2, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 3:
+			FastLED.addLeds<WS2811, 3, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 4:
+			FastLED.addLeds<WS2811, 4, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 5:
+			FastLED.addLeds<WS2811, 5, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 6:
+			FastLED.addLeds<WS2811, 6, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 7:
+			FastLED.addLeds<WS2811, 7, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 8:
+			FastLED.addLeds<WS2811, 8, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 9:
+			FastLED.addLeds<WS2811, 9, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 10:
+			FastLED.addLeds<WS2811, 10, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 11:
+			FastLED.addLeds<WS2811, 11, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 12:
+			FastLED.addLeds<WS2811, 12, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+		case 13:
+			FastLED.addLeds<WS2811, 13, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
+			break;
+	}
+}
+
