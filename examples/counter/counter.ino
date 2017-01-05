@@ -1,5 +1,8 @@
 #include "Lixie.h" // Include Lixie Library
-Lixie lix;         // Set class nickname for faster coding
+
+#define DATA_PIN   13
+#define NUM_LIXIES 4
+Lixie lix(DATA_PIN, NUM_LIXIES);
 
 uint32_t count = 0;
 

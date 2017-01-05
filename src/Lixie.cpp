@@ -5,19 +5,21 @@ Released under the GPLv3 license.
 */
 
 #include "Lixie.h"
-#include "config.h"
 
-#define NUM_LEDS NUM_DIGITS * 20
-CRGB leds[NUM_LEDS];
+#define LED_TYPE    WS2812B
+#define COLOR_ORDER GRB
 
-byte led_states[NUM_DIGITS*3];
-byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
-CRGB colors[NUM_DIGITS];
-CRGB colors_off[NUM_DIGITS];
-
+static constexpr byte Lixie::addresses[];
 float color_bal[3] = {1.00, 0.90, 0.65};
 
-Lixie::Lixie(){}
+Lixie::Lixie(uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20){
+	leds = new CRGB[NumLEDs];
+	led_states = new byte[NumDigits * 3]; // 24 bits for 20 LED states
+	colors = new CRGB[NumDigits];
+	colors_off = new CRGB[NumDigits];
+  
+	build_controller(pin);
+}
 
 void Lixie::setBit(uint16_t pos, byte val){
 	bitWrite(led_states[(pos/8)], pos % 8, val);
@@ -28,10 +30,9 @@ byte Lixie::getBit(uint16_t pos) const{
 }
 
 void Lixie::begin() {
-	FastLED.addLeds<WS2811, DATA_PIN, GRB>(leds, NUM_LEDS);
 	FastLED.show();
-	max_power(5,1000);
-	for(byte i = 0; i < NUM_DIGITS; i++){
+  max_power(5,1000);
+	for(byte i = 0; i < NumDigits; i++){
 		colors[i] = CRGB(255,255,255);
 		colors_off[i] = CRGB(0,0,0);
 	}
@@ -39,7 +40,7 @@ void Lixie::begin() {
 }
 
 void Lixie::clear(bool show_change) {
-	for (uint16_t i = 0; i < NUM_LEDS; i++) {
+	for (uint16_t i = 0; i < NumLEDs; i++) {
 		setBit(i,0);
 	}
 	if(show_change == true){
@@ -48,7 +49,7 @@ void Lixie::clear(bool show_change) {
 }
 
 void Lixie::show(){
-	for(uint16_t i = 0; i < NUM_LEDS; i++){
+	for(uint16_t i = 0; i < NumLEDs; i++){
 		if(getBit(i) == 1){
 			byte r = colors[i/20].r;
 			byte g = colors[i/20].g;
@@ -67,7 +68,7 @@ void Lixie::show(){
 
 // set all on color ------------------------------------
 void Lixie::color(byte r, byte g, byte b){
-	for(byte i = 0; i < NUM_DIGITS; i++){
+	for(byte i = 0; i < NumDigits; i++){
 		colors[i].r = r*color_bal[0];
 		colors[i].g = g*color_bal[1];
 		colors[i].b = b*color_bal[2];
@@ -75,7 +76,7 @@ void Lixie::color(byte r, byte g, byte b){
 }
 
 void Lixie::color(CRGB c){
-	for(byte i = 0; i < NUM_DIGITS; i++){
+	for(byte i = 0; i < NumDigits; i++){
 		colors[i].r = c.r*color_bal[0];
 		colors[i].g = c.g*color_bal[1];
 		colors[i].b = c.b*color_bal[2];
@@ -97,7 +98,7 @@ void Lixie::color(CRGB c, byte index){
 
 // set all off color -------------------------------------
 void Lixie::color_off(byte r, byte g, byte b){
-	for(byte i = 0; i < NUM_DIGITS; i++){
+	for(byte i = 0; i < NumDigits; i++){
 		colors_off[i].r = r*color_bal[0];
 		colors_off[i].g = g*color_bal[1];
 		colors_off[i].b = b*color_bal[2];
@@ -105,7 +106,7 @@ void Lixie::color_off(byte r, byte g, byte b){
 }
 
 void Lixie::color_off(CRGB c){
-	for(byte i = 0; i < NUM_DIGITS; i++){
+	for(byte i = 0; i < NumDigits; i++){
 		colors_off[i].r = c.r*color_bal[0];
 		colors_off[i].g = c.g*color_bal[1];
 		colors_off[i].b = c.b*color_bal[2];
@@ -215,8 +216,8 @@ void Lixie::write_digit(byte input, byte index){
 }
 
 void Lixie::push_digit(byte number) {
-	if (NUM_DIGITS > 1) {
-		for (uint16_t i = NUM_LEDS - 1; i >= 20; i--) {
+	if (NumDigits > 1) {
+		for (uint16_t i = NumLEDs - 1; i >= 20; i--) {
 			setBit(i,getBit(i - 20));
 		}
 		for (uint16_t i = 0; i < 20; i++) {
@@ -235,7 +236,7 @@ void Lixie::push_digit(byte number) {
 }
 
 void Lixie::print_binary() {
-	for (uint16_t i = 0; i < NUM_LEDS; i++) {
+	for (uint16_t i = 0; i < NumLEDs; i++) {
 		Serial.print(getBit(i));
 		if ((i + 1) % 20 == 0 && i != 0) {
 			Serial.print('\t');
@@ -245,15 +246,62 @@ void Lixie::print_binary() {
 }
 
 uint8_t Lixie::get_numdigits() const{
-	return NUM_DIGITS;
+	return NumDigits;
 }
 
 bool Lixie::maxed_out(float input){
-	if(input >= pow(10,NUM_DIGITS)){ // If input > number that can be displayed
+	if(input >= pow(10,NumDigits)){ // If input > number that can be displayed
 		return false;
 	}
 	else{
 		return true;
+	}
+}
+
+void Lixie::build_controller(uint8_t DataPin){
+	switch (DataPin){
+		case 0:
+			FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 1:
+			FastLED.addLeds<LED_TYPE, 1, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 2:
+			FastLED.addLeds<LED_TYPE, 2, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 3:
+			FastLED.addLeds<LED_TYPE, 3, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 4:
+			FastLED.addLeds<LED_TYPE, 4, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 5:
+			FastLED.addLeds<LED_TYPE, 5, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 6:
+			FastLED.addLeds<LED_TYPE, 6, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 7:
+			FastLED.addLeds<LED_TYPE, 7, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 8:
+			FastLED.addLeds<LED_TYPE, 8, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 9:
+			FastLED.addLeds<LED_TYPE, 9, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 10:
+			FastLED.addLeds<LED_TYPE, 10, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 11:
+			FastLED.addLeds<LED_TYPE, 11, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 12:
+			FastLED.addLeds<LED_TYPE, 12, COLOR_ORDER>(leds, NumLEDs);
+			break;
+		case 13:
+			FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
+			break;
 	}
 }
 

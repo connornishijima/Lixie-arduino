@@ -12,7 +12,7 @@ Released under the GPLv3 license.
 
 class Lixie{
 	public:
-		Lixie();
+		Lixie(uint8_t pin, uint8_t nDigits);
 		void begin();
 		void clear(bool show_change = true);
 
@@ -51,11 +51,19 @@ class Lixie{
 		void color_balance(float r_adj,float g_adj,float b_adj);
 
 	private:
+		static constexpr byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
+		const uint8_t NumDigits;
+		const uint16_t NumLEDs;
+		CRGB *leds;
+		CRGB *colors;
+		CRGB *colors_off;
+		byte *led_states;
 		void setBit(uint16_t pos, byte val);
 		byte getBit(uint16_t pos) const;
 		byte get_size(uint32_t input) const;
 		byte char_to_number(char input) const;
 		bool char_is_number(char input) const;
+		void build_controller(uint8_t DataPin);
 };
 
 #endif
