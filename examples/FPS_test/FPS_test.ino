@@ -18,16 +18,23 @@
 #include "Lixie.h" // Include Lixie Library
 
 #define DATA_PIN   13
-#define NUM_LIXIES 4
+#define NUM_LIXIES 3
 Lixie lix(DATA_PIN, NUM_LIXIES);
 
 uint32_t MAX_NUMBER = 500; // Number of times to write to the displays
 
 void setup() {
-  Serial.begin(115200);
-  Serial.println("Starting Lixie FPS test...");
-  
+  Serial.begin(115200);  
   lix.begin(); // Initialize LEDs
+}
+
+void loop() {
+  checkFPS();
+  delay(3000);
+}
+
+void checkFPS(){
+  Serial.println("Starting Lixie FPS test...");
   lix.color(255, 255, 0); // Yellow while testing
 
   unsigned long tStart = micros(); // Start time
@@ -38,11 +45,15 @@ void setup() {
   
   int FPS = 1000000 / ((tEnd - tStart) / MAX_NUMBER); // Get FPS by how many microseconds all writes took
   lix.color(0, 255, 0); // Green when done
-  lix.write(FPS);          // Display FPS
-
+  
   Serial.print("Done!\nFPS is: ");
   Serial.println(FPS);
-}
-
-void loop() {
+  
+  // Blink FPS result
+  for(byte i = 0; i < 4; i++){
+    lix.clear();
+    delay(250);
+    lix.write(FPS);
+    delay(250);
+  }
 }
