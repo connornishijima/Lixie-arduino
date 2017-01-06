@@ -30,7 +30,7 @@ byte Lixie::getBit(uint16_t pos) const{
 }
 
 void Lixie::begin() {
-	FastLED.show();
+	controller->showLeds();
   max_power(5,1000);
 	for(byte i = 0; i < NumDigits; i++){
 		colors[i] = CRGB(255,255,255);
@@ -63,7 +63,7 @@ void Lixie::show(){
 			leds[i] = CRGB(r,g,b);
 		}
 	}
-	FastLED.show();
+	controller->showLeds();
 }
 
 // set all on color ------------------------------------
@@ -269,46 +269,46 @@ bool Lixie::maxed_out(float input){
 void Lixie::build_controller(uint8_t DataPin){
 	switch (DataPin){
 		case 0:
-			FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 1:
-			FastLED.addLeds<LED_TYPE, 1, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 1, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 2:
-			FastLED.addLeds<LED_TYPE, 2, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 2, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 3:
-			FastLED.addLeds<LED_TYPE, 3, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 3, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 4:
-			FastLED.addLeds<LED_TYPE, 4, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 4, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 5:
-			FastLED.addLeds<LED_TYPE, 5, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 5, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 6:
-			FastLED.addLeds<LED_TYPE, 6, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 6, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 7:
-			FastLED.addLeds<LED_TYPE, 7, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 7, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 8:
-			FastLED.addLeds<LED_TYPE, 8, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 8, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 9:
-			FastLED.addLeds<LED_TYPE, 9, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 9, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 10:
-			FastLED.addLeds<LED_TYPE, 10, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 10, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 11:
-			FastLED.addLeds<LED_TYPE, 11, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 11, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 12:
-			FastLED.addLeds<LED_TYPE, 12, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 12, COLOR_ORDER>(leds, NumLEDs);
 			break;
 		case 13:
-			FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
+			controller = &FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
 			break;
 	}
 }
