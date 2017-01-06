@@ -49,6 +49,7 @@ class Lixie{
 		void color_off(CRGB c, byte index);
 		
 		void color_balance(CRGB c_adj);
+		void brightness(byte bright);
 
 	private:
 		static constexpr byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
@@ -59,6 +60,7 @@ class Lixie{
 		CRGB *colors_off;
 		byte *led_states;
 		CLEDController *controller;
+		byte bright = 255;
 		void setBit(uint16_t pos, byte val);
 		byte getBit(uint16_t pos) const;
 		byte get_size(uint32_t input) const;

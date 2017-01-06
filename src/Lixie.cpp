@@ -63,7 +63,7 @@ void Lixie::show(){
 			leds[i] = CRGB(r,g,b);
 		}
 	}
-	controller->showLeds();
+	controller->showLeds(bright);
 }
 
 // set all on color ------------------------------------
@@ -312,3 +312,8 @@ void Lixie::max_power(byte volts, uint16_t milliamps){
 void Lixie::color_balance(CRGB c_adj){
 	controller->setTemperature(c_adj);
 }
+
+void Lixie::brightness(byte newBright){
+	bright = newBright;
+}
+
