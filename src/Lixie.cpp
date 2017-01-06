@@ -10,7 +10,6 @@ Released under the GPLv3 license.
 #define COLOR_ORDER GRB
 
 static constexpr byte Lixie::addresses[];
-float color_bal[3] = {1.00, 0.90, 0.65};
 
 Lixie::Lixie(uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20){
 	leds = new CRGB[NumLEDs];
@@ -36,6 +35,7 @@ void Lixie::begin() {
 		colors[i] = CRGB(255,255,255);
 		colors_off[i] = CRGB(0,0,0);
 	}
+	color_balance(Tungsten100W);
 	clear();
 }
 
@@ -69,68 +69,60 @@ void Lixie::show(){
 // set all on color ------------------------------------
 void Lixie::color(byte r, byte g, byte b){
 	for(byte i = 0; i < NumDigits; i++){
-		colors[i].r = r*color_bal[0];
-		colors[i].g = g*color_bal[1];
-		colors[i].b = b*color_bal[2];
+		colors[i].r = r;
+		colors[i].g = g;
+		colors[i].b = b;
 	}
 }
 
 void Lixie::color(CRGB c){
 	for(byte i = 0; i < NumDigits; i++){
-		colors[i].r = c.r*color_bal[0];
-		colors[i].g = c.g*color_bal[1];
-		colors[i].b = c.b*color_bal[2];
+		colors[i] = c;
 	}
 }
 
 // set index on color ------------------------------------
 void Lixie::color(byte r, byte g, byte b, byte index){
 	if(index < NumDigits){
-		colors[index].r = r*color_bal[0];
-		colors[index].g = g*color_bal[1];
-		colors[index].b = b*color_bal[2];
+		colors[index].r = r;
+		colors[index].g = g;
+		colors[index].b = b;
 	}
 }
 
 void Lixie::color(CRGB c, byte index){
 	if(index < NumDigits){
-		colors[index].r = c.r*color_bal[0];
-		colors[index].g = c.g*color_bal[1];
-		colors[index].b = c.b*color_bal[2];
+		colors[index] = c;
 	}
 }
 
 // set all off color -------------------------------------
 void Lixie::color_off(byte r, byte g, byte b){
 	for(byte i = 0; i < NumDigits; i++){
-		colors_off[i].r = r*color_bal[0];
-		colors_off[i].g = g*color_bal[1];
-		colors_off[i].b = b*color_bal[2];
+		colors_off[i].r = r;
+		colors_off[i].g = g;
+		colors_off[i].b = b;
 	}
 }
 
 void Lixie::color_off(CRGB c){
 	for(byte i = 0; i < NumDigits; i++){
-		colors_off[i].r = c.r*color_bal[0];
-		colors_off[i].g = c.g*color_bal[1];
-		colors_off[i].b = c.b*color_bal[2];
+		colors_off[i] = c;
 	}
 }
 
 // set index color off -----------------------------------
 void Lixie::color_off(byte r, byte g, byte b, byte index){
 	if(index < NumDigits){
-		colors_off[index].r = r*color_bal[0];
-		colors_off[index].g = g*color_bal[1];
-		colors_off[index].b = b*color_bal[2];
+		colors_off[index].r = r;
+		colors_off[index].g = g;
+		colors_off[index].b = b;
 	}
 }
 
 void Lixie::color_off(CRGB c, byte index){
 	if(index < NumDigits){
-		colors_off[index].r = c.r*color_bal[0];
-		colors_off[index].g = c.g*color_bal[1];
-		colors_off[index].b = c.b*color_bal[2];
+		colors_off[index] = c;
 	}
 }
 
@@ -317,8 +309,6 @@ void Lixie::max_power(byte volts, uint16_t milliamps){
 	FastLED.setMaxPowerInVoltsAndMilliamps(volts,milliamps); 
 }
 
-void Lixie::color_balance(float r_adj,float g_adj,float b_adj){
-	color_bal[0] = r_adj;
-	color_bal[1] = g_adj;
-	color_bal[2] = b_adj;
+void Lixie::color_balance(CRGB c_adj){
+	controller->setTemperature(c_adj);
 }

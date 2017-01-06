@@ -48,7 +48,7 @@ class Lixie{
 		void color_off(byte r, byte g, byte b, byte index);
 		void color_off(CRGB c, byte index);
 		
-		void color_balance(float r_adj,float g_adj,float b_adj);
+		void color_balance(CRGB c_adj);
 
 	private:
 		static constexpr byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
