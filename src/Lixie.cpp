@@ -85,15 +85,19 @@ void Lixie::color(CRGB c){
 
 // set index on color ------------------------------------
 void Lixie::color(byte r, byte g, byte b, byte index){
-	colors[index].r = r*color_bal[0];
-	colors[index].g = g*color_bal[1];
-	colors[index].b = b*color_bal[2];
+	if(index < NumDigits){
+		colors[index].r = r*color_bal[0];
+		colors[index].g = g*color_bal[1];
+		colors[index].b = b*color_bal[2];
+	}
 }
 
 void Lixie::color(CRGB c, byte index){
-	colors[index].r = c.r*color_bal[0];
-	colors[index].g = c.g*color_bal[1];
-	colors[index].b = c.b*color_bal[2];
+	if(index < NumDigits){
+		colors[index].r = c.r*color_bal[0];
+		colors[index].g = c.g*color_bal[1];
+		colors[index].b = c.b*color_bal[2];
+	}
 }
 
 // set all off color -------------------------------------
@@ -115,15 +119,19 @@ void Lixie::color_off(CRGB c){
 
 // set index color off -----------------------------------
 void Lixie::color_off(byte r, byte g, byte b, byte index){
-	colors_off[index].r = r*color_bal[0];
-	colors_off[index].g = g*color_bal[1];
-	colors_off[index].b = b*color_bal[2];
+	if(index < NumDigits){
+		colors_off[index].r = r*color_bal[0];
+		colors_off[index].g = g*color_bal[1];
+		colors_off[index].b = b*color_bal[2];
+	}
 }
 
 void Lixie::color_off(CRGB c, byte index){
-	colors_off[index].r = c.r*color_bal[0];
-	colors_off[index].g = c.g*color_bal[1];
-	colors_off[index].b = c.b*color_bal[2];
+	if(index < NumDigits){
+		colors_off[index].r = c.r*color_bal[0];
+		colors_off[index].g = c.g*color_bal[1];
+		colors_off[index].b = c.b*color_bal[2];
+	}
 }
 
 byte Lixie::get_size(uint32_t input) const{
