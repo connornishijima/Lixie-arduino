@@ -1,6 +1,36 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Added brightness control (1/5/17 - dmadison)
+-----------------------------------------------------------
+
+With the instance-specific FastLED controllers set up, now seemed like the perfect time to implement brightness control. Brightness control is isolated per-instance, so you can adjust the brightness of each Lixie group independently. You can adjust brightness by calling:
+
+    brightness(255);
+
+Where the parameter is an integer between 0 - 255.
+
+Changed color balance functions to use FastLED (1/5/17 - dmadison)
+-----------------------------------------------------------
+
+I rewrote the color balance functionality so that it uses FastLED's color temperature implementation and CRGB objects. This has a number of benefits:
+
+- It's faster: the calibration math is done during the FastLED show() call, and I believe it's also done between bit-bang clock cycles. This mean's adjusting calibration on the fly is quicker.
+- It's nondestructive: colors in the color-setting arrays are not changed, which makes gradual color changes easier.
+- It's cleaner: I like pretty code.
+
+Created instance-specific FastLED controller (1/5/17 - dmadison)
+-----------------------------------------------------------
+
+Each instance now has its own FastLED controller, so things like brightness control, color balance, and show() calls can be isolated to specific displays rather than driven globally.
+
+
+Added array bounds check to color setting by index (1/5/17 - dmadison)
+-----------------------------------------------------------
+
+The color setting functions that allow the user to set a color for a specific digit now check to see if the digit exists before writing to the array. This should prevent memory addressing problems.
+
+
 Removed 'config.h' and added support for multiple instances (1/4/17)
 -----------------------------------------------------------
 
