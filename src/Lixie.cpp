@@ -50,18 +50,10 @@ void Lixie::clear(bool show_change) {
 
 void Lixie::show(){
 	for(uint16_t i = 0; i < NumLEDs; i++){
-		if(getBit(i) == 1){
-			byte r = colors[i/20].r;
-			byte g = colors[i/20].g;
-			byte b = colors[i/20].b;
-			leds[i] = CRGB(r,g,b);
-		}
-		else{
-			byte r = colors_off[i/20].r;
-			byte g = colors_off[i/20].g;
-			byte b = colors_off[i/20].b;
-			leds[i] = CRGB(r,g,b);
-		}
+		if(getBit(i) == 1)
+			leds[i] = colors[i/20];
+		else
+			leds[i] = colors_off[i/20];
 	}
 	FastLED.show();
 }
