@@ -30,7 +30,7 @@ byte Lixie::getBit(uint16_t pos) const{
 
 void Lixie::begin() {
 	controller->showLeds();
-  max_power(5,1000);
+	max_power(5,1000); // 5V, 1000mA
 	for(byte i = 0; i < NumDigits; i++){
 		colors[i] = CRGB(255,255,255);
 		colors_off[i] = CRGB(0,0,0);
@@ -50,18 +50,10 @@ void Lixie::clear(bool show_change) {
 
 void Lixie::show(){
 	for(uint16_t i = 0; i < NumLEDs; i++){
-		if(getBit(i) == 1){
-			byte r = colors[i/20].r;
-			byte g = colors[i/20].g;
-			byte b = colors[i/20].b;
-			leds[i] = CRGB(r,g,b);
-		}
-		else{
-			byte r = colors_off[i/20].r;
-			byte g = colors_off[i/20].g;
-			byte b = colors_off[i/20].b;
-			leds[i] = CRGB(r,g,b);
-		}
+		if(getBit(i) == 1)
+			leds[i] = colors[i/20];
+		else
+			leds[i] = colors_off[i/20];
 	}
 	controller->showLeds(bright);
 }
