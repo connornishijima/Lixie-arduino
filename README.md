@@ -9,7 +9,8 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 # Contents
 - [Installation](#installation)
 - [Getting Started](#getting-started)
-- [Functions](#functions)
+- [Basic Functions](#basic-functions)
+- [Additional Functions](#additional-functions)
 - [Contributing](#contributing)
 - [License and credits](#license-and-credits)
 
@@ -50,7 +51,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
     }
 
 ----------
-# Functions
+# Basic Functions
 
 **lix.begin**();
 
@@ -73,6 +74,21 @@ Sets the "on" color of the digits using RGB. This is the color of an active numb
 **lix.color_off**(byte **r**, byte **g**, byte **b**);
 
 Sets the "off" color of the digits using RGB. This is the color of all inactive numbers in the display. (Default: 0,0,0)
+
+----------
+# Additional Functions
+
+**lix.get_numdigits**();
+
+Returns the number of Lixie displays currently in use.
+
+**lix.brightness**(byte **bright**);
+
+Sets the brightness of the displays, from 0 - 255. (Default: 255)
+
+**lix.color_balance**(CRGB **c_adj**);
+
+Sets a color calibration for the LEDs. Supports all FastLED color temperatures, and custom temperatures in the form CRGB(r, g, b). (Default: Tungsten100W / R: 255 G: 214 B: 170)
 
 ----------
 # Contributing
