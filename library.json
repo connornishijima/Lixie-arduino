@@ -17,6 +17,6 @@
   "frameworks": "arduino",
   "platforms":
   [
-    "atmelavr"
+    "atmelavr","ststm32"
   ]
 }
