@@ -175,7 +175,7 @@ void Lixie::write(double input){
 }
 
 void Lixie::write_digit(byte input, byte index){
-	if(input > 9) return;
+	if(input > 9 || index >= NumDigits) return;
   
 	uint16_t start = (index*20);
 
