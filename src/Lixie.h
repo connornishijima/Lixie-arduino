@@ -39,7 +39,7 @@ class Lixie{
 		void brightness(byte bright);
 		
 		uint8_t get_numdigits() const;
-		bool maxed_out(float input);
+		bool maxed_out(uint32_t input);
 
 		// Debug Functions
 		void print_binary();

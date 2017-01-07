@@ -236,8 +236,8 @@ uint8_t Lixie::get_numdigits() const{
 	return NumDigits;
 }
 
-bool Lixie::maxed_out(float input){
-	if(input >= pow(10,NumDigits)){ // If input > number that can be displayed
+bool Lixie::maxed_out(uint32_t input){
+	if(get_size(input) > NumDigits){ // If input > number that can be displayed
 		return false;
 	}
 	else{
