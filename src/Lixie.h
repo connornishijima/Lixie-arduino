@@ -32,11 +32,11 @@ class Lixie{
 		void color_off(CRGB c);
 		void color_off(byte r, byte g, byte b, byte index);
 		void color_off(CRGB c, byte index);
-	
-		void max_power(byte volts, uint16_t milliamps);
 
 		void brightness(byte bright);
 		void color_balance(CRGB c_adj);
+
+		void max_power(byte volts, uint16_t milliamps);
 	
 		uint8_t get_numdigits() const;
 		bool maxed_out(uint32_t input);
