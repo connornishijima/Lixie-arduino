@@ -152,17 +152,20 @@ void Lixie::write(char* input){
 }
 
 void Lixie::write(uint32_t input){
-	char t[20] = "";
-	sprintf(t,"%lu",input);
+	uint32_t nPlace = 1;
+
 	clear(false);
-	if(input != 0){
-		for(byte i = 0; i < get_size(input); i++){
-			push_digit(char_to_number(t[i]));
-		}
+
+	// Powers of 10 while avoiding floating point math
+	for(uint8_t i = 1; i < get_size(input); i++){
+		nPlace *= 10;
 	}
-	else{
-		push_digit(0);
+
+	for(nPlace; nPlace > 0; nPlace /= 10){
+		push_digit(input / nPlace);
+		if(nPlace > 1) input = (input % nPlace);
 	}
+
 	show();
 }
 
