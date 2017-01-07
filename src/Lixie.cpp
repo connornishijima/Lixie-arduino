@@ -237,12 +237,10 @@ uint8_t Lixie::get_numdigits() const{
 }
 
 bool Lixie::maxed_out(uint32_t input){
-	if(get_size(input) > NumDigits){ // If input > number that can be displayed
-		return false;
-	}
-	else{
+	if(get_size(input) > NumDigits) // If input > number that can be displayed
 		return true;
-	}
+	else
+		return false;
 }
 
 void Lixie::build_controller(uint8_t DataPin){
