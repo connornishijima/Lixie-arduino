@@ -11,6 +11,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 - [Getting Started](#getting-started)
 - [Basic Functions](#basic-functions)
 - [Advanced Functions](#advanced-functions)
+- [Debug Functions](#debug-functions)
 - [Contributing](#contributing)
 - [License and credits](#license-and-credits)
 
@@ -75,12 +76,12 @@ Sets the "on" color of the digits using RGB. This is the color of an active numb
 
 Sets the "off" color of the digits using RGB. This is the color of all inactive numbers in the display. (Default: 0,0,0)
 
+**lix.show**();
+
+Force the Lixies to update with current values and colors. Called automatically after every write call.
+
 ----------
 # Advanced Functions
-
-**lix.get_numdigits**();
-
-Returns the number of Lixie displays currently in use as an integer.
 
 **lix.brightness**(byte **bright**);
 
@@ -89,6 +90,31 @@ Sets the brightness of the displays, from 0 - 255. (Default: 255)
 **lix.color_balance**(CRGB **c_adj**);
 
 Sets a color calibration for the LEDs. Supports all FastLED color temperatures, and custom temperatures in the form CRGB(r, g, b). (Default: Tungsten100W / R: 255 G: 214 B: 170)
+
+**lix.max_power**(int **volts**, int **milliamps**);
+
+Sets a software power limit for all Lixies. Displaying white at full brightness, a Lixie will draw approximately 120mA. (Default: 5V, 1000mA)
+
+**lix.get_numdigits**();
+
+Returns the number of Lixie displays currently in use, as an integer.
+
+**lix.maxed_out**(int **input**);
+
+Returns true if the input is too large to fit on the displays, false otherwise.
+
+----------
+# Debug Functions
+
+The library also includes a few debugging functions if you're having issues with your displays. These functions require that the Serial library be initialized with "Serial.begin(speed)" before they will work.
+
+**lix.print_binary**();
+
+Prints the values of the led_states array, in binary, to the serial console.
+
+**lix.print_current**();
+
+Prints the current values on the display, in integers, to the serial console.
 
 ----------
 # Contributing
