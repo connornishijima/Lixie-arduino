@@ -19,10 +19,6 @@ class Lixie{
 		void write(uint32_t input);
 		void write(char* input);
 	
-		void write(int input);
-		void write(long input);
-		void write(int8_t input);
-		void write(byte input);
 		void write(float input);
 		void write(double input);
 	
