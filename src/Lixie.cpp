@@ -192,6 +192,8 @@ void Lixie::write(double input){
 }
 
 void Lixie::write_digit(byte input, byte index){
+	if(input > 9) return;
+  
 	uint16_t start = (index*20);
 
 	for(uint16_t i = start; i < start+20; i++){
