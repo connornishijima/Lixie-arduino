@@ -227,6 +227,19 @@ void Lixie::print_binary() {
 	Serial.println();
 }
 
+void Lixie::print_current(){
+	// Reversed map of the standard addresses
+	static const uint8_t readdress[10] = {3, 9, 2, 0, 1, 6, 5, 7, 4, 8,};
+
+	for(int8_t i = NumDigits - 1; i >= 0; i--){
+		for(uint8_t j = 0; j < 10; j++){
+			if(getBit(i*20 + j))
+				Serial.print(readdress[j]);
+		}
+	}
+	Serial.println();
+}
+
 uint8_t Lixie::get_numdigits() const{
 	return NumDigits;
 }

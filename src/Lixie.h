@@ -29,6 +29,7 @@ class Lixie{
 
 		void show();
 		void print_binary();
+		void print_current();
 		uint8_t get_numdigits() const;
 		bool maxed_out(float input);
 
