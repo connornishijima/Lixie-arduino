@@ -35,9 +35,9 @@ class Lixie{
 	
 		void max_power(byte volts, uint16_t milliamps);
 
-		void color_balance(CRGB c_adj);
 		void brightness(byte bright);
-		
+		void color_balance(CRGB c_adj);
+	
 		uint8_t get_numdigits() const;
 		bool maxed_out(uint32_t input);
 
