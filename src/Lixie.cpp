@@ -36,7 +36,7 @@ void Lixie::begin() {
 		colors_off[i] = CRGB(0,0,0);
 	}
 	color_balance(Tungsten100W);
-	clear();
+	clear(false);
 }
 
 void Lixie::clear(bool show_change) {
