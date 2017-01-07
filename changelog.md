@@ -1,13 +1,17 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Fixed ESP8266 compilation issue (1/7/17 - Connor Nishijima)
+-----------------------------------------------------------
+
+After a string of very creative contributions by David Madison (dmadison below), the library would no longer compile on ESP8266 architectures. This was solved by only allowing the pins 0, 2, 4, 12, and 13 to control Lixie displays if compiled for an ESP8266 architecture. Now his awesome additions to this library work on both AVR and ESP8266!
+
 Updated documentation (1/6/17 - dmadison)
 -----------------------------------------------------------
 
 Along with all of the other changes in this pull request, I updated the keywords.txt, README.md, and changelog.md (Hi!).
 
 The keywords list was reorganized to match the header file, and I also added a few missing function keywords to the list. The README was updated with all of the new functions that have been added in the past few weeks and the 'uint32_t' datatypes were renamed as 'int' for comprehension purposes. I also changed the wording from "Additional Functions" to "*Advanced* Functions", and added another section for "Debug Functions".
-
 
 Reorganized header function order (1/6/17 - dmadison)
 -----------------------------------------------------------
