@@ -169,14 +169,6 @@ void Lixie::write(uint32_t input){
 	show();
 }
 
-void Lixie::write(float input){
-	write(uint32_t(input));
-}
-
-void Lixie::write(double input){
-	write(uint32_t(input));
-}
-
 void Lixie::write_digit(byte input, byte index){
 	if(input > 9 || index >= NumDigits) return;
   

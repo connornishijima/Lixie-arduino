@@ -19,9 +19,6 @@ class Lixie{
 		void write(uint32_t input);
 		void write(char* input);
 	
-		void write(float input);
-		void write(double input);
-	
 		void push_digit(byte number);
 		void write_digit(byte input, byte index);
 	
