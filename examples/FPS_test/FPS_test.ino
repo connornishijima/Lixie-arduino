@@ -18,7 +18,7 @@
 #include "Lixie.h" // Include Lixie Library
 
 #define DATA_PIN   13
-#define NUM_LIXIES 3
+#define NUM_LIXIES 4
 Lixie lix(DATA_PIN, NUM_LIXIES);
 
 uint32_t MAX_NUMBER = 500; // Number of times to write to the displays
