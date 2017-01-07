@@ -208,16 +208,16 @@ void Lixie::write_digit(byte input, byte index){
 }
 
 void Lixie::push_digit(byte number) {
+	// If multiple digits, move all LED states forward one
 	if (NumDigits > 1) {
 		for (uint16_t i = NumLEDs - 1; i >= 20; i--) {
 			setBit(i,getBit(i - 20));
 		}
-		for (uint16_t i = 0; i < 20; i++) {
-			setBit(i,0);
-		}
 	}
-	else {
-		clear(false);
+ 
+	// Clear the LED states for the first digit
+	for (uint16_t i = 0; i < 20; i++) {
+		setBit(i,0);
 	}
 
 	uint16_t L1 = addresses[number];
