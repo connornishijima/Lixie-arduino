@@ -208,6 +208,8 @@ void Lixie::write_digit(byte input, byte index){
 }
 
 void Lixie::push_digit(byte number) {
+	if(number > 9) return;
+
 	// If multiple digits, move all LED states forward one
 	if (NumDigits > 1) {
 		for (uint16_t i = NumLEDs - 1; i >= 20; i--) {
