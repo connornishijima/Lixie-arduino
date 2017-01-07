@@ -12,7 +12,7 @@ Released under the GPLv3 license.
 
 class Lixie{
 	public:
-		Lixie(uint8_t pin, uint8_t nDigits);
+		Lixie(const uint8_t pin, uint8_t nDigits);
 		void begin();
    
 		void clear(bool show_change = true);
