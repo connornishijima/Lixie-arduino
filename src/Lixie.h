@@ -39,11 +39,11 @@ class Lixie{
 		void max_power(byte volts, uint16_t milliamps);
 	
 		uint8_t get_numdigits() const;
-		bool maxed_out(uint32_t input);
+		bool maxed_out(uint32_t input) const;
 
 		// Debug Functions
-		void print_binary();
-		void print_current();
+		void print_binary() const;
+		void print_current() const;
 
 	private:
 		static constexpr byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};

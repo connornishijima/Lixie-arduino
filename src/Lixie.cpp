@@ -209,7 +209,7 @@ void Lixie::push_digit(byte number) {
 	setBit(L2,1);
 }
 
-void Lixie::print_binary() {
+void Lixie::print_binary() const{
 	for (uint16_t i = 0; i < NumLEDs; i++) {
 		Serial.print(getBit(i));
 		if ((i + 1) % 20 == 0 && i != 0) {
@@ -219,7 +219,7 @@ void Lixie::print_binary() {
 	Serial.println();
 }
 
-void Lixie::print_current(){
+void Lixie::print_current() const{
 	// Reversed map of the standard addresses
 	static const uint8_t readdress[10] = {3, 9, 2, 0, 1, 6, 5, 7, 4, 8,};
 
@@ -236,7 +236,7 @@ uint8_t Lixie::get_numdigits() const{
 	return NumDigits;
 }
 
-bool Lixie::maxed_out(uint32_t input){
+bool Lixie::maxed_out(uint32_t input) const{
 	if(get_size(input) > NumDigits) // If input > number that can be displayed
 		return true;
 	else
