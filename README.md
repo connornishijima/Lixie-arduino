@@ -61,9 +61,9 @@ Inititalizes the underlying FastLED library and sets up variables like the digit
 
 Clears all displays, all lights off.
 
-**lix.write**(uint32_t **input** OR char* **input**);
+**lix.write**(int **input** OR char* **input**);
 
-    uint32_t: Clears the displays, and pushes in a multi-digit integer as in: 2016
+    int: Clears the displays, and pushes in a multi-digit integer as in: 2016
 
     char*: Clears the displays, and pushes in a char array as in: "2016". This ignores any non-numeric chars in the string, allowing you to send "12:52:47 PM" and have the displays show "12 52 47" for a clock.
 
@@ -80,7 +80,7 @@ Sets the "off" color of the digits using RGB. This is the color of all inactive 
 
 **lix.get_numdigits**();
 
-Returns the number of Lixie displays currently in use.
+Returns the number of Lixie displays currently in use as an integer.
 
 **lix.brightness**(byte **bright**);
 
