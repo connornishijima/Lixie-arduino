@@ -10,7 +10,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 - [Installation](#installation)
 - [Getting Started](#getting-started)
 - [Basic Functions](#basic-functions)
-- [Additional Functions](#additional-functions)
+- [Advanced Functions](#advanced-functions)
 - [Contributing](#contributing)
 - [License and credits](#license-and-credits)
 
@@ -76,7 +76,7 @@ Sets the "on" color of the digits using RGB. This is the color of an active numb
 Sets the "off" color of the digits using RGB. This is the color of all inactive numbers in the display. (Default: 0,0,0)
 
 ----------
-# Additional Functions
+# Advanced Functions
 
 **lix.get_numdigits**();
 
