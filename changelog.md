@@ -6,7 +6,7 @@ Updated documentation (1/6/17 - dmadison)
 
 Along with all of the other changes in this pull request, I updated the keywords.txt, README.md, and changelog.md (Hi!).
 
-The keywords list was reorganized to match the header file, and I also added a few missing function keywords to the list. The README was updated with all of the new functions that have been added in the past few weeks and the 'uint32_t' datatypes were renamed as 'int' for comprehension purposes. I also changed the wording from "Additonal Funtions" to "*Advanced* Functions", and added another section for "Debug Functions".
+The keywords list was reorganized to match the header file, and I also added a few missing function keywords to the list. The README was updated with all of the new functions that have been added in the past few weeks and the 'uint32_t' datatypes were renamed as 'int' for comprehension purposes. I also changed the wording from "Additional Functions" to "*Advanced* Functions", and added another section for "Debug Functions".
 
 
 Reorganized header function order (1/6/17 - dmadison)
