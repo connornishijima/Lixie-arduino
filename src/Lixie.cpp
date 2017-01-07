@@ -119,8 +119,8 @@ void Lixie::color_off(CRGB c, byte index){
 }
 
 byte Lixie::get_size(uint32_t input) const{
-	byte places = 0;
-	while(input > 0){
+	byte places = 1;
+	while(input > 9){
 		places++;
 		input = input / 10;
 	}
