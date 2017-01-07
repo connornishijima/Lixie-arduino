@@ -36,7 +36,7 @@ void Lixie::begin() {
 		colors_off[i] = CRGB(0,0,0);
 	}
 	color_balance(Tungsten100W);
-	clear();
+	clear(false);
 }
 
 void Lixie::clear(bool show_change) {
@@ -119,10 +119,10 @@ void Lixie::color_off(CRGB c, byte index){
 }
 
 byte Lixie::get_size(uint32_t input) const{
-	byte places = 0;
-	while(input > 0){
+	byte places = 1;
+	while(input > 9){
 		places++;
-		input = input / 10;
+		input /= 10;
 	}
 	return places;
 }
@@ -152,46 +152,26 @@ void Lixie::write(char* input){
 }
 
 void Lixie::write(uint32_t input){
-	char t[20] = "";
-	sprintf(t,"%lu",input);
+	uint32_t nPlace = 1;
+
 	clear(false);
-	if(input != 0){
-		for(byte i = 0; i < get_size(input); i++){
-			push_digit(char_to_number(t[i]));
-		}
+
+	// Powers of 10 while avoiding floating point math
+	for(uint8_t i = 1; i < get_size(input); i++){
+		nPlace *= 10;
 	}
-	else{
-		push_digit(0);
+
+	for(nPlace; nPlace > 0; nPlace /= 10){
+		push_digit(input / nPlace);
+		if(nPlace > 1) input = (input % nPlace);
 	}
+
 	show();
 }
 
-void Lixie::write(int input){
-	write(uint32_t(input));
-}
-
-
-void Lixie::write(long input){
-	write(uint32_t(input));
-}
-
-void Lixie::write(int8_t input){
-	write(uint32_t(input));
-}
-
-void Lixie::write(byte input){
-	write(uint32_t(input));
-}
-
-void Lixie::write(float input){
-	write(uint32_t(input));
-}
-
-void Lixie::write(double input){
-	write(uint32_t(input));
-}
-
 void Lixie::write_digit(byte input, byte index){
+	if(input > 9 || index >= NumDigits) return;
+  
 	uint16_t start = (index*20);
 
 	for(uint16_t i = start; i < start+20; i++){
@@ -208,16 +188,18 @@ void Lixie::write_digit(byte input, byte index){
 }
 
 void Lixie::push_digit(byte number) {
+	if(number > 9) return;
+
+	// If multiple digits, move all LED states forward one
 	if (NumDigits > 1) {
 		for (uint16_t i = NumLEDs - 1; i >= 20; i--) {
 			setBit(i,getBit(i - 20));
 		}
-		for (uint16_t i = 0; i < 20; i++) {
-			setBit(i,0);
-		}
 	}
-	else {
-		clear(false);
+ 
+	// Clear the LED states for the first digit
+	for (uint16_t i = 0; i < 20; i++) {
+		setBit(i,0);
 	}
 
 	uint16_t L1 = addresses[number];
@@ -227,7 +209,7 @@ void Lixie::push_digit(byte number) {
 	setBit(L2,1);
 }
 
-void Lixie::print_binary() {
+void Lixie::print_binary() const{
 	for (uint16_t i = 0; i < NumLEDs; i++) {
 		Serial.print(getBit(i));
 		if ((i + 1) % 20 == 0 && i != 0) {
@@ -237,17 +219,28 @@ void Lixie::print_binary() {
 	Serial.println();
 }
 
+void Lixie::print_current() const{
+	// Reversed map of the standard addresses
+	static const uint8_t readdress[10] = {3, 9, 2, 0, 1, 6, 5, 7, 4, 8,};
+
+	for(int8_t i = NumDigits - 1; i >= 0; i--){
+		for(uint8_t j = 0; j < 10; j++){
+			if(getBit(i*20 + j))
+				Serial.print(readdress[j]);
+		}
+	}
+	Serial.println();
+}
+
 uint8_t Lixie::get_numdigits() const{
 	return NumDigits;
 }
 
-bool Lixie::maxed_out(float input){
-	if(input >= pow(10,NumDigits)){ // If input > number that can be displayed
-		return false;
-	}
-	else{
+bool Lixie::maxed_out(uint32_t input) const{
+	if(get_size(input) > NumDigits) // If input > number that can be displayed
 		return true;
-	}
+	else
+		return false;
 }
 
 void Lixie::build_controller(uint8_t DataPin){

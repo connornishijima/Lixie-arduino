@@ -1,6 +1,61 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Updated documentation (1/6/17 - dmadison)
+-----------------------------------------------------------
+
+Along with all of the other changes in this pull request, I updated the keywords.txt, README.md, and changelog.md (Hi!).
+
+The keywords list was reorganized to match the header file, and I also added a few missing function keywords to the list. The README was updated with all of the new functions that have been added in the past few weeks and the 'uint32_t' datatypes were renamed as 'int' for comprehension purposes. I also changed the wording from "Additional Functions" to "*Advanced* Functions", and added another section for "Debug Functions".
+
+
+Reorganized header function order (1/6/17 - dmadison)
+-----------------------------------------------------------
+
+This is an aesthetic change, but I moved around some of the functions in the header file to make a more logical order. Like functions are grouped, with more important functions higher in the list.
+
+Changed 'maxed_out' function (1/6/17 - dmadison)
+-----------------------------------------------------------
+
+I was struggling with the inaccuracy of Arduino's floats when I was rewriting the 'write' function, so I thought it was best to get rid of them here as well. The function now takes an integer rather than a float and does the calculation using the 'get_size' function. I also flipped the output, so if the value *does* 'max out' the displays the function will return *true*, rather than false.
+
+
+Added 'print_current' debug function (1/6/17 - dmadison)
+-----------------------------------------------------------
+
+While I was messing with rewriting the 'write' functions, I thought it would be useful to have a function that returned the current values of the displays, based on the led_states array. This function prints values as integers to the serial monitor in the same order they are inputted (i.e. opposite of the data order sent to the Lixies), and requires the Serial class be initialized.
+
+
+Rewrote integer version of 'write' function (1/6/17 - dmadison)
+-----------------------------------------------------------
+
+Previously the integer version of the 'write' function used a temporary character array and sprintf. I rewrote the function to work with pure integer math, which improves performance by ~10% on my setup (ignoring push_digit). It also uses less memory.
+
+
+Removed overloaded versions of the 'write' function (1/6/17 - dmadison)
+-----------------------------------------------------------
+
+Connor had added a few extra functions that overloaded the 'write' function to handle outside cases such as floats and smaller integers. This was a good idea, but in practice the overloaded methods just explicitly invoked a type conversion without doing any additional data transformation. The compiler actually catches these cases automatically, so they did nothing but add a bit of complexity to the library and confuse the compiler (e.g. "call of overloaded 'write(uint16_t&)' is ambiguous"). I removed the extra versions - smaller integers will still fit in the larger uint32_t datatype and floats are automatically type converted by the compiler.
+
+
+Added input checks to digit write functions (1/6/17 - dmadison)
+-----------------------------------------------------------
+
+The lower-level 'write_digit' and 'push_digit' functions now have input sanitization. This should prevent accidentally reading and writing outside of allocated memory.
+
+
+Cleaned up 'push_digit' function (1/6/17 - dmadison)
+-----------------------------------------------------------
+
+I added comments to make the function a bit less obscure, and I removed the redundant 'clear' call because the led_states for the first digit needs to be cleared regardless.
+
+
+Fixed get_size function bug (1/6/17 - dmadison)
+-----------------------------------------------------------
+
+Previously the function would report that any input of '0' had a size of 0. Because the '0' digit still requires one display, the function will return 1 by default and is bounded to 9 rather than 0.
+
+
 Added brightness control (1/5/17 - dmadison)
 -----------------------------------------------------------
 

@@ -11,19 +11,21 @@
 ###################################
 
 begin	KEYWORD2
-write	KEYWORD2
-push_digit	KEYWORD2
-write_digit	KEYWORD2
+clear	KEYWORD2
 show	KEYWORD2
-print_binary	KEYWORD2
-get_numdigits	KEYWORD2
-maxed_out	KEYWORD2
+write	KEYWORD2
+write_digit	KEYWORD2
+push_digit	KEYWORD2
 color	KEYWORD2
 color_off	KEYWORD2
-clear	KEYWORD2
-lix KEYWORD2
-max_power	KEYWORD2
+brightness  KEYWORD2
 color_balance	KEYWORD2
+max_power	KEYWORD2
+get_numdigits	KEYWORD2
+maxed_out	KEYWORD2
+print_binary	KEYWORD2
+print_current KEYWORD2
+lix KEYWORD2
 
 ###################################
 # Constants (LITERAL1)
