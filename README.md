@@ -124,4 +124,7 @@ Any advice or pull requests are welcome. :)
 # License and Credits
 **Developed by Connor Nishijima (2016)**
 
+**Hall of Fame:**
+- David Madison
+
 **Released under the [GPLv3 license](http://www.gnu.org/licenses/gpl-3.0.en.html).**
