@@ -14,36 +14,36 @@ class Lixie{
 	public:
 		Lixie(uint8_t pin, uint8_t nDigits);
 		void begin();
+   
 		void clear(bool show_change = true);
-
+		void show();
 		void write(uint32_t input);
 		void write(char* input);
-	
-		void push_digit(byte number);
+    
 		void write_digit(byte input, byte index);
-	
-		void max_power(byte volts, uint16_t milliamps);
-
-		void show();
-		void print_binary();
-		void print_current();
-		uint8_t get_numdigits() const;
-		bool maxed_out(float input);
-
+		void push_digit(byte number);
+    
 		void color(byte r, byte g, byte b);
 		void color(CRGB c);
-
 		void color(byte r, byte g, byte b, byte index);
 		void color(CRGB c, byte index);
 
 		void color_off(byte r, byte g, byte b);
 		void color_off(CRGB c);
-
 		void color_off(byte r, byte g, byte b, byte index);
 		void color_off(CRGB c, byte index);
-		
+	
+		void max_power(byte volts, uint16_t milliamps);
+
 		void color_balance(CRGB c_adj);
 		void brightness(byte bright);
+		
+		uint8_t get_numdigits() const;
+		bool maxed_out(float input);
+
+		// Debug Functions
+		void print_binary();
+		void print_current();
 
 	private:
 		static constexpr byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
