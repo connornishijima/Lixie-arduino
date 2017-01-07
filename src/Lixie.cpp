@@ -122,7 +122,7 @@ byte Lixie::get_size(uint32_t input) const{
 	byte places = 1;
 	while(input > 9){
 		places++;
-		input = input / 10;
+		input /= 10;
 	}
 	return places;
 }
