@@ -6,6 +6,11 @@ Released under the GPLv3 license.
 
 #include "Lixie.h"
 
+// Check if FastLED version is sufficient
+#if FASTLED_VERSION < 3000000
+  #error "Lixie requires FastLED 3.0.0 or later: https://github.com/FastLED/FastLED"
+#endif
+
 constexpr byte Lixie::Addresses[];
 
 Lixie::Lixie(const uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * LEDsPerDigit){
