@@ -6,7 +6,11 @@ Misc. Updates (1/8/17 - dmadison)
 
 I tweaked the ESP8266-specific code Connor just added so it's mutually exclusive with the AVR (Arduino) architecture, which should prevent the program from trying to create duplicate FastLED controllers. There was also an 'else' missing in the AVR if statement ladder which was fixed.
 
-I also added a 'LEDsPerDigit' constant set to 20, to replace all of the scattered '20' values around the library. Should make the code more readable. 
+At the same time I removed all of the brackets from the build_controller case ladder. No reason for them to be there, and it makes the code neater. The 'addresses' array was also capitalzied to signify it is constant.
+
+I moved the LED defines (LED_TYPE and COLOR_ORDER) to the header and added guards to prevent redefines.
+
+I also added a 'LEDsPerDigit' constant set to 20, to replace all of the scattered '20' values around the library. Should make the code more readable.
 
 Lastly, I updated the README to include a 'Troubleshooting' section and a line about needing to leave a little dynamic memory for the Lixie arrays.
 
