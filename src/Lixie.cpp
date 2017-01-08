@@ -6,9 +6,6 @@ Released under the GPLv3 license.
 
 #include "Lixie.h"
 
-#define LED_TYPE    WS2812B
-#define COLOR_ORDER GRB
-
 constexpr byte Lixie::addresses[];
 
 Lixie::Lixie(const uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20){

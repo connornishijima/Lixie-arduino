@@ -10,6 +10,14 @@ Released under the GPLv3 license.
 #include "Arduino.h"
 #include "FastLED.h"
 
+#ifndef LED_TYPE
+  #define LED_TYPE WS2812B
+#endif
+
+#ifndef COLOR_ORDER
+  #define COLOR_ORDER GRB
+#endif
+
 class Lixie{
 	public:
 		Lixie(const uint8_t pin, uint8_t nDigits);
