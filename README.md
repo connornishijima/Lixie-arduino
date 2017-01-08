@@ -104,6 +104,10 @@ Returns the number of Lixie displays currently in use, as an integer.
 
 Returns true if the input is too large to fit on the displays, false otherwise.
 
+**lix.get_leds**();
+
+Returns a pointer to the CRGB array that holds the color values sent to the displays. The library's *show()* function overwrites the values in this array, so call *FastLED.show()* to see any changes.
+
 ----------
 # Debug Functions
 
