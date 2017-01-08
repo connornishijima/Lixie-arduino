@@ -245,65 +245,46 @@ bool Lixie::maxed_out(uint32_t input) const{
 
 void Lixie::build_controller(const uint8_t pin){
 	#ifdef __AVR__
-		if (pin == 0){
+		if (pin == 0)
 			controller = &FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 1){
+		else if (pin == 1)
 			controller = &FastLED.addLeds<LED_TYPE, 1, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 2){
+		else if (pin == 2)
 			controller = &FastLED.addLeds<LED_TYPE, 2, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 3){
+		else if (pin == 3)
 			controller = &FastLED.addLeds<LED_TYPE, 3, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 4){
+		else if (pin == 4)
 			controller = &FastLED.addLeds<LED_TYPE, 4, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 5){
+		else if (pin == 5)
 			controller = &FastLED.addLeds<LED_TYPE, 5, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 6){
+		else if (pin == 6)
 			controller = &FastLED.addLeds<LED_TYPE, 6, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 7){
+		else if (pin == 7)
 			controller = &FastLED.addLeds<LED_TYPE, 7, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 8){
+		else if (pin == 8)
 			controller = &FastLED.addLeds<LED_TYPE, 8, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 9){
+		else if (pin == 9)
 			controller = &FastLED.addLeds<LED_TYPE, 9, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 10){
+		else if (pin == 10)
 			controller = &FastLED.addLeds<LED_TYPE, 10, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 11){
+		else if (pin == 11)
 			controller = &FastLED.addLeds<LED_TYPE, 11, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 12){
+		else if (pin == 12)
 			controller = &FastLED.addLeds<LED_TYPE, 12, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 13){
+		else if (pin == 13)
 			controller = &FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
-		}
 	#endif
 	#ifdef ESP8266
-		if (pin == 0){
+		if (pin == 0)
 			controller = &FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 2){
+		else if (pin == 2)
 			controller = &FastLED.addLeds<LED_TYPE, 2, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 4){
+		else if (pin == 4)
 			controller = &FastLED.addLeds<LED_TYPE, 4, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 12){
+		else if (pin == 12)
 			controller = &FastLED.addLeds<LED_TYPE, 12, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 13){
+		else if (pin == 13)
 			controller = &FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
-		}
 	#endif
 }
 
