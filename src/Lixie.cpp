@@ -8,7 +8,7 @@ Released under the GPLv3 license.
 
 constexpr byte Lixie::addresses[];
 
-Lixie::Lixie(const uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20){
+Lixie::Lixie(const uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * LEDsPerDigit){
 	leds = new CRGB[NumLEDs];
 	led_states = new byte[NumDigits * 3]; // 24 bits for 20 LED states
 	colors = new CRGB[NumDigits];
@@ -46,9 +46,9 @@ void Lixie::clear(bool show_change) {
 void Lixie::show(){
 	for(uint16_t i = 0; i < NumLEDs; i++){
 		if(getBit(i) == 1)
-			leds[i] = colors[i/20];
+			leds[i] = colors[i/LEDsPerDigit];
 		else
-			leds[i] = colors_off[i/20];
+			leds[i] = colors_off[i/LEDsPerDigit];
 	}
 	controller->showLeds(bright);
 }
@@ -167,9 +167,9 @@ void Lixie::write(uint32_t input){
 void Lixie::write_digit(byte input, byte index){
 	if(input > 9 || index >= NumDigits) return;
   
-	uint16_t start = (index*20);
+	uint16_t start = (index*LEDsPerDigit);
 
-	for(uint16_t i = start; i < start+20; i++){
+	for(uint16_t i = start; i < start+LEDsPerDigit; i++){
 		setBit(i,0);
 	}
 
@@ -187,13 +187,13 @@ void Lixie::push_digit(byte number) {
 
 	// If multiple digits, move all LED states forward one
 	if (NumDigits > 1) {
-		for (uint16_t i = NumLEDs - 1; i >= 20; i--) {
-			setBit(i,getBit(i - 20));
+		for (uint16_t i = NumLEDs - 1; i >= LEDsPerDigit; i--) {
+			setBit(i,getBit(i - LEDsPerDigit));
 		}
 	}
  
 	// Clear the LED states for the first digit
-	for (uint16_t i = 0; i < 20; i++) {
+	for (uint16_t i = 0; i < LEDsPerDigit; i++) {
 		setBit(i,0);
 	}
 
@@ -207,7 +207,7 @@ void Lixie::push_digit(byte number) {
 void Lixie::print_binary() const{
 	for (uint16_t i = 0; i < NumLEDs; i++) {
 		Serial.print(getBit(i));
-		if ((i + 1) % 20 == 0 && i != 0) {
+		if ((i + 1) % LEDsPerDigit == 0 && i != 0) {
 			Serial.print('\t');
 		}
 	}
@@ -220,7 +220,7 @@ void Lixie::print_current() const{
 
 	for(int8_t i = NumDigits - 1; i >= 0; i--){
 		for(uint8_t j = 0; j < 10; j++){
-			if(getBit(i*20 + j))
+			if(getBit(i*LEDsPerDigit + j))
 				Serial.print(readdress[j]);
 		}
 	}
