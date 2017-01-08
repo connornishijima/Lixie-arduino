@@ -6,7 +6,7 @@ Released under the GPLv3 license.
 
 #include "Lixie.h"
 
-constexpr byte Lixie::addresses[];
+constexpr byte Lixie::Addresses[];
 
 Lixie::Lixie(const uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * LEDsPerDigit){
 	leds = new CRGB[NumLEDs];
@@ -173,8 +173,8 @@ void Lixie::write_digit(byte input, byte index){
 		setBit(i,0);
 	}
 
-	uint16_t L1 = start+addresses[input];
-	uint16_t L2 = start+addresses[input] + 10;
+	uint16_t L1 = start+Addresses[input];
+	uint16_t L2 = start+Addresses[input] + 10;
 
 	setBit(L1,1);
 	setBit(L2,1);
@@ -197,8 +197,8 @@ void Lixie::push_digit(byte number) {
 		setBit(i,0);
 	}
 
-	uint16_t L1 = addresses[number];
-	uint16_t L2 = addresses[number] + 10;
+	uint16_t L1 = Addresses[number];
+	uint16_t L2 = Addresses[number] + 10;
 
 	setBit(L1,1);
 	setBit(L2,1);

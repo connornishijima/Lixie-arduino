@@ -54,7 +54,7 @@ class Lixie{
 		void print_current() const;
 
 	private:
-		static constexpr byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
+		static constexpr byte Addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
 		const static uint8_t LEDsPerDigit = 20;
 		const uint8_t NumDigits;
 		const uint16_t NumLEDs;
