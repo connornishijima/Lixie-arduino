@@ -273,8 +273,7 @@ void Lixie::build_controller(const uint8_t pin){
 			controller = &FastLED.addLeds<LED_TYPE, 12, COLOR_ORDER>(leds, NumLEDs);
 		else if (pin == 13)
 			controller = &FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
-	#endif
-	#ifdef ESP8266
+	#elif ESP8266
 		if (pin == 0)
 			controller = &FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
 		else if (pin == 2)
