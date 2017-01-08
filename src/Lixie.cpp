@@ -26,14 +26,13 @@ byte Lixie::getBit(uint16_t pos) const{
 }
 
 void Lixie::begin() {
-	controller->showLeds();
 	max_power(5,1000); // 5V, 1000mA
 	for(byte i = 0; i < NumDigits; i++){
 		colors[i] = CRGB(255,255,255);
 		colors_off[i] = CRGB(0,0,0);
 	}
 	color_balance(Tungsten100W);
-	clear(false);
+	clear();
 }
 
 void Lixie::clear(bool show_change) {
