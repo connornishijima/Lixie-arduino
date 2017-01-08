@@ -37,9 +37,7 @@ void Lixie::begin() {
 }
 
 void Lixie::clear(bool show_change) {
-	for (uint16_t i = 0; i < NumLEDs; i++) {
-		setBit(i,0);
-	}
+	memset(led_states, 0, NumDigits * 3);
 	if(show_change == true){
 		show();
 	}
