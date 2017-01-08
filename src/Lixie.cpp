@@ -248,7 +248,7 @@ void Lixie::build_controller(const uint8_t pin){
 		if (pin == 0){
 			controller = &FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
 		}
-		if (pin == 1){
+		else if (pin == 1){
 			controller = &FastLED.addLeds<LED_TYPE, 1, COLOR_ORDER>(leds, NumLEDs);
 		}
 		else if (pin == 2){
