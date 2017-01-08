@@ -12,6 +12,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 - [Basic Functions](#basic-functions)
 - [Advanced Functions](#advanced-functions)
 - [Debug Functions](#debug-functions)
+- [Troubleshooting](#troubleshooting)
 - [Contributing](#contributing)
 - [License and credits](#license-and-credits)
 
@@ -103,6 +104,10 @@ Returns the number of Lixie displays currently in use, as an integer.
 
 Returns true if the input is too large to fit on the displays, false otherwise.
 
+**lix.get_leds**();
+
+Returns a pointer to the CRGB array that holds the color values sent to the displays. The library's *show()* function overwrites the values in this array, so call *FastLED.show()* to see any changes.
+
 ----------
 # Debug Functions
 
@@ -115,6 +120,13 @@ Prints the values of the led_states array, in binary, to the serial console.
 **lix.print_current**();
 
 Prints the current values on the display, in integers, to the serial console.
+
+----------
+# Troubleshooting
+
+At the moment the library uses dynamic allocation for the LED arrays, which is not reported as allocated memory by the compiler. If your microcontroller is doing strange things, the first thing to check is that you have at least 70 bytes of dynamic memory available per Lixie digit.
+
+If you've discovered a bug in the library, please create an issue on the Github repository so it can be fixed!
 
 ----------
 # Contributing

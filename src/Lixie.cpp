@@ -6,12 +6,9 @@ Released under the GPLv3 license.
 
 #include "Lixie.h"
 
-#define LED_TYPE    WS2812B
-#define COLOR_ORDER GRB
+constexpr byte Lixie::Addresses[];
 
-constexpr byte Lixie::addresses[];
-
-Lixie::Lixie(const uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * 20){
+Lixie::Lixie(const uint8_t pin, uint8_t nDigits):NumDigits(nDigits), NumLEDs(nDigits * LEDsPerDigit){
 	leds = new CRGB[NumLEDs];
 	led_states = new byte[NumDigits * 3]; // 24 bits for 20 LED states
 	colors = new CRGB[NumDigits];
@@ -40,9 +37,7 @@ void Lixie::begin() {
 }
 
 void Lixie::clear(bool show_change) {
-	for (uint16_t i = 0; i < NumLEDs; i++) {
-		setBit(i,0);
-	}
+	memset(led_states, 0, NumDigits * 3);
 	if(show_change == true){
 		show();
 	}
@@ -51,9 +46,9 @@ void Lixie::clear(bool show_change) {
 void Lixie::show(){
 	for(uint16_t i = 0; i < NumLEDs; i++){
 		if(getBit(i) == 1)
-			leds[i] = colors[i/20];
+			leds[i] = colors[i/LEDsPerDigit];
 		else
-			leds[i] = colors_off[i/20];
+			leds[i] = colors_off[i/LEDsPerDigit];
 	}
 	controller->showLeds(bright);
 }
@@ -172,14 +167,14 @@ void Lixie::write(uint32_t input){
 void Lixie::write_digit(byte input, byte index){
 	if(input > 9 || index >= NumDigits) return;
   
-	uint16_t start = (index*20);
+	uint16_t start = (index*LEDsPerDigit);
 
-	for(uint16_t i = start; i < start+20; i++){
+	for(uint16_t i = start; i < start+LEDsPerDigit; i++){
 		setBit(i,0);
 	}
 
-	uint16_t L1 = start+addresses[input];
-	uint16_t L2 = start+addresses[input] + 10;
+	uint16_t L1 = start+Addresses[input];
+	uint16_t L2 = start+Addresses[input] + 10;
 
 	setBit(L1,1);
 	setBit(L2,1);
@@ -192,18 +187,18 @@ void Lixie::push_digit(byte number) {
 
 	// If multiple digits, move all LED states forward one
 	if (NumDigits > 1) {
-		for (uint16_t i = NumLEDs - 1; i >= 20; i--) {
-			setBit(i,getBit(i - 20));
+		for (uint16_t i = NumLEDs - 1; i >= LEDsPerDigit; i--) {
+			setBit(i,getBit(i - LEDsPerDigit));
 		}
 	}
  
 	// Clear the LED states for the first digit
-	for (uint16_t i = 0; i < 20; i++) {
+	for (uint16_t i = 0; i < LEDsPerDigit; i++) {
 		setBit(i,0);
 	}
 
-	uint16_t L1 = addresses[number];
-	uint16_t L2 = addresses[number] + 10;
+	uint16_t L1 = Addresses[number];
+	uint16_t L2 = Addresses[number] + 10;
 
 	setBit(L1,1);
 	setBit(L2,1);
@@ -212,7 +207,7 @@ void Lixie::push_digit(byte number) {
 void Lixie::print_binary() const{
 	for (uint16_t i = 0; i < NumLEDs; i++) {
 		Serial.print(getBit(i));
-		if ((i + 1) % 20 == 0 && i != 0) {
+		if ((i + 1) % LEDsPerDigit == 0 && i != 0) {
 			Serial.print('\t');
 		}
 	}
@@ -225,7 +220,7 @@ void Lixie::print_current() const{
 
 	for(int8_t i = NumDigits - 1; i >= 0; i--){
 		for(uint8_t j = 0; j < 10; j++){
-			if(getBit(i*20 + j))
+			if(getBit(i*LEDsPerDigit + j))
 				Serial.print(readdress[j]);
 		}
 	}
@@ -243,67 +238,51 @@ bool Lixie::maxed_out(uint32_t input) const{
 		return false;
 }
 
+CRGB* Lixie::get_leds() const{
+	return leds;
+}
+
 void Lixie::build_controller(const uint8_t pin){
 	#ifdef __AVR__
-		if (pin == 0){
+		if (pin == 0)
 			controller = &FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
-		}
-		if (pin == 1){
+		else if (pin == 1)
 			controller = &FastLED.addLeds<LED_TYPE, 1, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 2){
+		else if (pin == 2)
 			controller = &FastLED.addLeds<LED_TYPE, 2, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 3){
+		else if (pin == 3)
 			controller = &FastLED.addLeds<LED_TYPE, 3, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 4){
+		else if (pin == 4)
 			controller = &FastLED.addLeds<LED_TYPE, 4, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 5){
+		else if (pin == 5)
 			controller = &FastLED.addLeds<LED_TYPE, 5, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 6){
+		else if (pin == 6)
 			controller = &FastLED.addLeds<LED_TYPE, 6, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 7){
+		else if (pin == 7)
 			controller = &FastLED.addLeds<LED_TYPE, 7, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 8){
+		else if (pin == 8)
 			controller = &FastLED.addLeds<LED_TYPE, 8, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 9){
+		else if (pin == 9)
 			controller = &FastLED.addLeds<LED_TYPE, 9, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 10){
+		else if (pin == 10)
 			controller = &FastLED.addLeds<LED_TYPE, 10, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 11){
+		else if (pin == 11)
 			controller = &FastLED.addLeds<LED_TYPE, 11, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 12){
+		else if (pin == 12)
 			controller = &FastLED.addLeds<LED_TYPE, 12, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 13){
+		else if (pin == 13)
 			controller = &FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
-		}
-	#endif
-	#ifdef ESP8266
-		if (pin == 0){
+	#elif ESP8266
+		if (pin == 0)
 			controller = &FastLED.addLeds<LED_TYPE, 0, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 2){
+		else if (pin == 2)
 			controller = &FastLED.addLeds<LED_TYPE, 2, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 4){
+		else if (pin == 4)
 			controller = &FastLED.addLeds<LED_TYPE, 4, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 12){
+		else if (pin == 12)
 			controller = &FastLED.addLeds<LED_TYPE, 12, COLOR_ORDER>(leds, NumLEDs);
-		}
-		else if (pin == 13){
+		else if (pin == 13)
 			controller = &FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
-		}
 	#endif
 }
 

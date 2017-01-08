@@ -10,6 +10,30 @@ Counter is the typical counter example, modified to work with two groups of Lixi
 
 Scoreboard is a fun little program that requires two push buttons and at least two Lixies. Press one of the two buttons to see your score go up. When it reaches the 'winning number', it plays a short animation and then resets.
 
+Added 'get_leds' function (1/8/17 - dmadison)
+-----------------------------------------------------------
+
+Added a simple function that returns a pointer to the LED array. This allows the user to edit the data sent to the LEDs directly if they wish.
+
+Misc. Updates (1/8/17 - dmadison)
+-----------------------------------------------------------
+
+I tweaked the ESP8266-specific code Connor just added so it's mutually exclusive with the AVR (Arduino) architecture, which should prevent the program from trying to create duplicate FastLED controllers. There was also an 'else' missing in the AVR if statement ladder which was fixed.
+
+At the same time I removed all of the brackets from the build_controller case ladder. No reason for them to be there, and it makes the code neater. The 'addresses' array was also capitalzied to signify it is constant.
+
+I moved the LED defines (LED_TYPE and COLOR_ORDER) to the header and added guards to prevent redefines.
+
+I also added a 'LEDsPerDigit' constant set to 20, to replace all of the scattered '20' values around the library. Should make the code more readable.
+
+Lastly, I updated the README to include a 'Troubleshooting' section and a line about needing to leave a little dynamic memory for the Lixie arrays.
+
+'Clear' function now uses memset (1/8/17 - dmadison)
+-----------------------------------------------------------
+
+I rewrote the 'clear' function to use 'memset' rather than 'setBit'. That means rather than going bit by bit finding the correct place in the led_state array and then performing a *single* bitWrite, it simply rewrites the entire chunk of memory at once. On my rig it's another 10% speed increase!
+
+It may make sense to eventually call 'memset' for the times the library clears single digits, but in the current implementation the digits share bytes in the array so it's not possible.
 
 Fixed ESP8266 compilation issue (1/7/17 - Connor Nishijima)
 -----------------------------------------------------------

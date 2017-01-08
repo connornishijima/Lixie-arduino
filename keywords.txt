@@ -23,6 +23,7 @@ color_balance	KEYWORD2
 max_power	KEYWORD2
 get_numdigits	KEYWORD2
 maxed_out	KEYWORD2
+get_leds  KEYWORD2
 print_binary	KEYWORD2
 print_current KEYWORD2
 lix KEYWORD2
