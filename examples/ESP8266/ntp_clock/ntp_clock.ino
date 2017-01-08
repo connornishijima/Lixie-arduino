@@ -36,6 +36,7 @@ ESP8266WiFiMulti WiFiMulti;
 const char* WIFI_SSID = "";  //  your network SSID (name)
 const char* WIFI_PASS = "";  //  your network password
 
+const bool HOUR_12 = true;    // 12-hour format
 const bool SIX_DIGIT = false; // True if 6-digit clock with seconds
 const byte TIME_COLOR_RGB[3] = {0,255,255}; // CYAN
 const int TIME_OFFSET = -7;     // US Mountain Time
@@ -102,45 +103,23 @@ void loop()
 
 void digitalClockDisplay()
 {
-  // digital clock display of the time
-  String time_now;
-  String h;
-  String m;
-  String s;
+  // Using 1,000,000 as our base number creates zero-padded times.
+  uint32_t sum = 1000000;
 
-  if(hour() < 10){
-    h = "0"+String(hour());
-  }
-  else{
-    h = String(hour());
-  }
-  if(minute() < 10){
-    m = "0"+String(minute());
-  }
-  else{
-    m = String(minute());
-  }
-  if(second() < 10){
-    s = "0"+String(second());
-  }
-  else{
-    s = String(second());
-  }
+  // Put the hour on two digits,
+  sum += format_hour(hour())*10000;
+  // The minute on two more,
+  sum += minute()*100;
+  // and the seconds on two more.
+  sum += second();
 
-  time_now += h;
-  time_now += ":";
-  time_now += m;
-  if(SIX_DIGIT == true){
-    time_now += ":";
-    time_now += s;
+  // Take out the seconds if we just have a 4-digit clock
+  if(SIX_DIGIT == false){
+    sum /= 100;
   }
-
-  char buf[10];
-  time_now.toCharArray(buf,10);
 
   lix.color(TIME_COLOR_RGB[0],TIME_COLOR_RGB[1],TIME_COLOR_RGB[2]);
-  lix.write(buf);
-  Serial.println(time_now);
+  lix.write(sum); // write our formatted long
 }
 
 /*-------- NTP code ----------*/
@@ -200,4 +179,14 @@ void sendNTPpacket(IPAddress &address)
   Udp.beginPacket(address, 123); //NTP requests are to port 123
   Udp.write(packetBuffer, NTP_PACKET_SIZE);
   Udp.endPacket();
+}
+
+byte format_hour(byte hr){
+  if(hr > 12){
+    hr-=12;
+  }
+  if(hr == 0){
+    hr = 12;
+  }
+  return hr;
 }
