@@ -1,6 +1,11 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Added 'get_leds' function (1/8/17 - dmadison)
+-----------------------------------------------------------
+
+Added a simple function that returns a pointer to the LED array. This allows the user to edit the data sent to the LEDs directly if they wish.
+
 Misc. Updates (1/8/17 - dmadison)
 -----------------------------------------------------------
 
