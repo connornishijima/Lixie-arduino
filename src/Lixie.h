@@ -10,6 +10,14 @@ Released under the GPLv3 license.
 #include "Arduino.h"
 #include "FastLED.h"
 
+#ifndef LED_TYPE
+  #define LED_TYPE WS2812B
+#endif
+
+#ifndef COLOR_ORDER
+  #define COLOR_ORDER GRB
+#endif
+
 class Lixie{
 	public:
 		Lixie(const uint8_t pin, uint8_t nDigits);
@@ -41,12 +49,15 @@ class Lixie{
 		uint8_t get_numdigits() const;
 		bool maxed_out(uint32_t input) const;
 
+		CRGB* get_leds() const;
+
 		// Debug Functions
 		void print_binary() const;
 		void print_current() const;
 
 	private:
-		static constexpr byte addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
+		static constexpr byte Addresses[10] = {3, 4, 2, 0, 8, 6, 5, 7, 9, 1};
+		const static uint8_t LEDsPerDigit = 20;
 		const uint8_t NumDigits;
 		const uint16_t NumLEDs;
 		CRGB *leds;
