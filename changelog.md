@@ -1,6 +1,47 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+
+Added check for FastLED minimum version (3.0.0) (1/8/17 - connornishijima)
+-----------------------------------------------------------
+
+Lixie.cpp:
+
+    // Error if we can't find FastLED
+    #if FASTLED_VERSION < 3000000
+      #error "Lixie requires FastLED 3.0 or later: https://github.com/FastLED/FastLED"
+    #endif
+
+Fixed random colors issue (1/8/17 - connornishijima)
+-----------------------------------------------------------
+
+This change fixes random colors on boot, caused by showing FastLED before setting up colors:
+
+New:
+
+    void Lixie::begin() {
+    	max_power(5,1000); // 5V, 1000mA
+    	for(byte i = 0; i < NumDigits; i++){
+    		colors[i] = CRGB(255,255,255);
+    		colors_off[i] = CRGB(0,0,0);
+    	}
+    	color_balance(Tungsten100W);
+    	clear();
+    }
+    
+Old:
+
+    void Lixie::begin() {
+        controller->showLeds(bright);
+    	max_power(5,1000); // 5V, 1000mA
+    	for(byte i = 0; i < NumDigits; i++){
+    		colors[i] = CRGB(255,255,255);
+    		colors_off[i] = CRGB(0,0,0);
+    	}
+    	color_balance(Tungsten100W);
+    	clear(false);
+    }   
+
 Added multi-Lixie examples (1/8/17 - dmadison)
 -----------------------------------------------------------
 
@@ -35,7 +76,7 @@ I rewrote the 'clear' function to use 'memset' rather than 'setBit'. That means 
 
 It may make sense to eventually call 'memset' for the times the library clears single digits, but in the current implementation the digits share bytes in the array so it's not possible.
 
-Fixed ESP8266 compilation issue (1/7/17 - Connor Nishijima)
+Fixed ESP8266 compilation issue (1/7/17 - connornishijima)
 -----------------------------------------------------------
 
 After a string of very creative contributions by David Madison (dmadison below), the library would no longer compile on ESP8266 architectures. This was solved by only allowing the pins 0, 2, 4, 12, and 13 to control Lixie displays if compiled for an ESP8266 architecture. Now his awesome additions to this library work on both AVR and ESP8266!
