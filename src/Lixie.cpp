@@ -238,6 +238,10 @@ bool Lixie::maxed_out(uint32_t input) const{
 		return false;
 }
 
+CRGB* Lixie::get_leds() const{
+	return leds;
+}
+
 void Lixie::build_controller(const uint8_t pin){
 	#ifdef __AVR__
 		if (pin == 0)

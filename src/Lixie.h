@@ -49,6 +49,8 @@ class Lixie{
 		uint8_t get_numdigits() const;
 		bool maxed_out(uint32_t input) const;
 
+		CRGB* get_leds() const;
+
 		// Debug Functions
 		void print_binary() const;
 		void print_current() const;
