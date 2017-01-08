@@ -1,6 +1,16 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Added multi-Lixie examples (1/8/17 - dmadison)
+-----------------------------------------------------------
+
+I added two new examples that show off multi-group support: *counter_multi* and *scoreboard*.
+
+Counter is the typical counter example, modified to work with two groups of Lixies. One group counts down from its max-displayable value, while the other counts up.
+
+Scoreboard is a fun little program that requires two push buttons and at least two Lixies. Press one of the two buttons to see your score go up. When it reaches the 'winning number', it plays a short animation and then resets.
+
+
 Fixed ESP8266 compilation issue (1/7/17 - Connor Nishijima)
 -----------------------------------------------------------
 
