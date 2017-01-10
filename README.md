@@ -36,21 +36,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 ------------
 # Getting Started:
 
-    #include "Lixie.h" // Include Lixie Library
-    
-    #define DATA_PIN   13
-    #define NUM_LIXIES 4
-    Lixie lix(DATA_PIN, NUM_LIXIES); // Customize parameters to your setup
-    
-    void setup() {
-      lix.begin();                     // Initialize LEDs
-      lix.color(0,255,255);   // Set color with RGB (CYAN)
-    }
-    
-    void loop() {
-      lix.write( millis() );       // Write millis() to the displays
-      delay(1);
-    }
+![Example Sketch](http://i.imgur.com/pUESpaD.jpg)
 
 ----------
 # Basic Functions
