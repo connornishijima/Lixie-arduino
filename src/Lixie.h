@@ -40,6 +40,9 @@ class Lixie{
 		void color_off(CRGB c);
 		void color_off(byte r, byte g, byte b, byte index);
 		void color_off(CRGB c, byte index);
+	
+		void color_fade(CRGB color, uint16_t duration);
+		void color_fade(CRGB color, uint16_t duration, byte index);
 
 		void brightness(byte bright);
 		void color_balance(CRGB c_adj);
