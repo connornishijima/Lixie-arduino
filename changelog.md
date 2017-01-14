@@ -1,6 +1,16 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Added color_fade() functionality (1/8/17 - connornishijima)
+-----------------------------------------------------------
+
+Calling the following:
+
+    lix.color_fade(CRGB(0,255,0), 1000);
+    
+will fade all digits (no matter their current color) to pure green over a period of 1 second! (Blocking method, watch out!) This has an accuracy of +/-5 milliseconds or so. You can also specify an index to only fade one digit:
+
+    lix.color_fade(CRGB(0,255,0), 1000, 0);
 
 Added check for FastLED minimum version (3.0.0) (1/8/17 - connornishijima)
 -----------------------------------------------------------
