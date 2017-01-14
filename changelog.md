@@ -1,6 +1,26 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Added color_array_fade() functiona (1/14/17 - connornishijima)
+-----------------------------------------------------------
+
+This allows you to define a CRGB array[NumDigits] of colors for every digit to fade to at once.
+
+    // Random color party!
+
+    void loop() {
+    	CRGB arr[4];
+    	arr[0] = CHSV(random(0, 256), 255, 255);
+    	arr[1] = CHSV(random(0, 256), 255, 255);
+    	arr[2] = CHSV(random(0, 256), 255, 255);
+    	arr[3] = CHSV(random(0, 256), 255, 255);
+
+    	lix.write(count);
+    	lix.color_array_fade(arr, 250);
+
+    	count++;
+    }
+
 Added color_fade() functionality (1/13/17 - connornishijima)
 -----------------------------------------------------------
 
