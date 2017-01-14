@@ -1,7 +1,7 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
-Added color_fade() functionality (1/8/17 - connornishijima)
+Added color_fade() functionality (1/13/17 - connornishijima)
 -----------------------------------------------------------
 
 Calling the following:
