@@ -1,6 +1,12 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Added sweep() animation (1/14/17 - connornishijima)
+-----------------------------------------------------------
+This runs one sweep of a cylon-scanner style animation, call it again afterwards to keep it running.
+
+    lix.sweep(CRGB col);
+
 Added write_flip() function (1/14/17 - connornishijima)
 -----------------------------------------------------------
 
