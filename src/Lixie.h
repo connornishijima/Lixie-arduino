@@ -25,8 +25,13 @@ class Lixie{
    
 		void clear(bool show_change = true);
 		void show();
+		
 		void write(uint32_t input);
 		void write(char* input);
+		
+		void write_flip(uint32_t input, uint16_t flip_time = 100);
+		
+		void sweep(CRGB col);
     
 		void write_digit(byte input, byte index);
 		void push_digit(byte number);
@@ -40,9 +45,11 @@ class Lixie{
 		void color_off(CRGB c);
 		void color_off(byte r, byte g, byte b, byte index);
 		void color_off(CRGB c, byte index);
-	
-		void color_fade(CRGB color, uint16_t duration);
-		void color_fade(CRGB color, uint16_t duration, byte index);
+		
+		void color_fade(CRGB col, uint16_t duration);
+		void color_fade(CRGB col, uint16_t duration, byte index);
+		
+		void color_array_fade(CRGB *cols, uint16_t duration);
 
 		void brightness(byte bright);
 		void color_balance(CRGB c_adj);
@@ -69,6 +76,7 @@ class Lixie{
 		byte *led_states;
 		CLEDController *controller;
 		byte bright = 255;
+		byte sweep_dir = 0;
 		void setBit(uint16_t pos, byte val);
 		byte getBit(uint16_t pos) const;
 		byte get_size(uint32_t input) const;
