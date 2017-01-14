@@ -1,7 +1,14 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
-Added color_array_fade() functiona (1/14/17 - connornishijima)
+Added write_flip() function (1/14/17 - connornishijima)
+-----------------------------------------------------------
+
+This simulates a [split flap display](https://www.youtube.com/watch?v=jXM3odR4GoM) animation when writing a new number to the displays. It only accepts numbers, and only works for numbers displayable with your number of digits.
+
+    lix.write_flip(uint32_t input, uint16_t flip_time = 100);
+
+Added color_array_fade() function (1/14/17 - connornishijima)
 -----------------------------------------------------------
 
 This allows you to define a CRGB array[NumDigits] of colors for every digit to fade to at once.
