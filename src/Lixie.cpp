@@ -117,6 +117,77 @@ void Lixie::color_off(CRGB c, byte index){
 	}
 }
 
+// fade color on -----------------------------------
+void Lixie::color_fade(CRGB col, uint16_t duration){
+	// Copy existing colors to temporary array,
+        // this way we can refer to the original while changing colors.
+	CRGB colors_temp[NumDigits]; 
+	for(byte i = 0; i < NumDigits; i++){
+		colors_temp[i] = colors[i];
+	}
+
+	byte push = 50; // push defines how much we "push" through progress per step, and how long we wait
+	
+	if(duration < 100){
+		duration = 100; // Less than 100 hangs, kind of pointless anyways
+	}
+	else if(duration < 250){ // If less than 250ms fade time, reduce resolution
+		push = 100;
+	}
+
+	uint16_t del = push*(duration/1000.0); // How long to hold during each step
+	for (float progress = 0; progress < 1; progress += (push/1000.0)){
+		// This part is kind of hacky, but allows for accurate timing without
+		// hardware specific timers. We measure the time it took to do all the
+		// Lixie calls, and subract it from the period of this step. This gets
+		// us +/- 5 millisecond duration accuracy.
+		long tStart = millis();
+		for(byte i = 0; i < NumDigits; i++){
+			color(CRGB(
+				colors_temp[i].r * (1 - progress) + col.r * progress,
+				colors_temp[i].g * (1 - progress) + col.g * progress,
+				colors_temp[i].b * (1 - progress) + col.b * progress
+			),i);
+		}
+		show();
+		long tEnd = millis();
+		delay(del - (tEnd - tStart)); // Subtract Lixie time
+	}
+	color(col);
+	show();
+}
+
+// fade index color on -----------------------------------------
+
+// documentation same as above, this time we're only fading a single digit
+void Lixie::color_fade(CRGB col, uint16_t duration, byte index){
+	CRGB color_temp = colors[index];
+	byte push = 50;
+	
+	if(duration < 100){
+		duration = 100;
+	}
+	else if(duration < 250){
+		push = 100;
+	}
+
+	uint16_t del = push*(duration/1000.0);
+	for (float progress = 0; progress < 1; progress += (push/1000.0)){
+		long tStart = millis();
+			color(CRGB(
+				color_temp.r * (1 - progress) + col.r * progress,
+				color_temp.g * (1 - progress) + col.g * progress,
+				color_temp.b * (1 - progress) + col.b * progress
+			),index);
+		
+		show();
+		long tEnd = millis();
+		delay(del - (tEnd - tStart));
+	}
+	color(col,index);
+	show();
+}
+
 byte Lixie::get_size(uint32_t input) const{
 	byte places = 1;
 	while(input > 9){
