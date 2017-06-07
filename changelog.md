@@ -1,6 +1,12 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Fixed pin assignment issue for ESP8266 (6/7/17 - connornishijima)
+-----------------------------------------------------------
+After this change, only pins 0,2,4 and 5 are usable for Lixie on ESP8266. Because the Arduino IDE has no way of differentiating between different version of the ESP8266 breakout boards or SMT modules, I have to go with this solution that covers all popular bases like the bare ESP-12, Wemos, HUZZAH, NodeMCU, and more. Before, the default pin of sketches was 13. This worked for Arduino, and for the Adafruit Huzzah I was using. But a WEMOS D1 Mini or NodeMCU doesn't have a pin assigned to "D13", leading users to a compile-time error that wasn't very descript at all. It should work now!
+
+New default Lixie pin on any archetecture is Pin 5.
+    
 Added sweep() animation (1/14/17 - connornishijima)
 -----------------------------------------------------------
 This runs one sweep of a cylon-scanner style animation, call it again afterwards to keep it running.
