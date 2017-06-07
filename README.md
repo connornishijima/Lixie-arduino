@@ -80,7 +80,7 @@ Sets a color calibration for the LEDs. Supports all FastLED color temperatures, 
 
 **lix.max_power**(int **volts**, int **milliamps**);
 
-Sets a software power limit for all Lixies. Displaying white at full brightness, a Lixie will draw approximately 120mA. (Default: 5V, 1000mA)
+Sets a software power limit for all Lixies. Displaying white at full brightness, a Lixie will draw approximately 1200mA. (Default: 5V, 1000mA)
 
 **lix.get_numdigits**();
 
