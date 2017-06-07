@@ -18,8 +18,8 @@
 #include "Lixie.h" // Include Lixie Library
 
 // Set i/o pins and number of Lixies
-const int dataPin1 = 13;
-const int dataPin2 = 12;
+const int dataPin1 = 4;
+const int dataPin2 = 5;
 const int inputPin1 = 2;
 const int inputPin2 = 3;
 
