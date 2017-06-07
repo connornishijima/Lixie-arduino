@@ -1,7 +1,7 @@
 /*
-Lixie.cpp - Library for driving Lixie displays!
-Created by Connor Nishijima, October 26th 2016.
-Released under the GPLv3 license.
+  Lixie.cpp - Library for driving Lixie displays!
+  Created by Connor Nishijima, October 26th 2016.
+  Released under the GPLv3 license.
 */
 
 #include "Lixie.h"
@@ -117,7 +117,32 @@ void Lixie::color_off(CRGB c, byte index){
 	}
 }
 
+void Lixie::flash_in(CRGB col){
+	for(float fade = 0; fade < 1; fade += 0.02){
+		for(uint16_t i = 0; i < NumLEDs; i++){
+			leds[i].r = col.r*fade;
+			leds[i].g = col.g*fade;
+			leds[i].b = col.b*fade;
+		}
+		FastLED.show();
+		delay(10);
+	}
+}
+
+void Lixie::flash_out(CRGB col){
+	for(float fade = 1; fade > 0; fade -= 0.02){
+		for(uint16_t i = 0; i < NumLEDs; i++){
+			leds[i].r = col.r*fade;
+			leds[i].g = col.g*fade;
+			leds[i].b = col.b*fade;
+		}
+		FastLED.show();
+		delay(10);
+	}
+}
+
 void Lixie::color_fade(CRGB col, uint16_t duration){
+	
 	CRGB colors_temp[NumDigits];
 	for(byte i = 0; i < NumDigits; i++){
 		colors_temp[i] = colors[i];
@@ -160,7 +185,7 @@ void Lixie::color_fade(CRGB col, uint16_t duration, byte index){
 	else if(duration < 250){
 		push = 100;
 	}
-
+	
 	uint16_t del = push*(duration/1000.0);
 	for (float progress = 0; progress < 1; progress += (push/1000.0)){
 		long tStart = millis();
@@ -208,6 +233,14 @@ void Lixie::color_array_fade(CRGB *cols, uint16_t duration){
 		delay(del - (tEnd - tStart));
 	}
 	show();
+}
+
+void Lixie::color_array_fade(CHSV *cols, uint16_t duration){
+	CRGB tempArray[NumDigits];
+	for(byte i = 0; i < NumDigits; i++){
+		tempArray[i] = CRGB(cols[i]);
+	}
+	color_array_fade(tempArray,duration);
 }
 
 byte Lixie::get_size(uint32_t input) const{
@@ -370,6 +403,19 @@ void Lixie::sweep(CRGB col){
 	}
 }
 
+void Lixie::progress(byte percent, CRGB col1, CRGB col2){
+	uint16_t index = NumLEDs-(NumLEDs*(percent/100.0));
+	for(uint16_t i = 0; i < NumLEDs; i++){
+		if(i <= index){
+			leds[i] = col2;
+		}
+		else{
+			leds[i] = col1;
+		}
+	}
+	FastLED.show();
+}
+
 void Lixie::print_binary() const{
 	for (uint16_t i = 0; i < NumLEDs; i++) {
 		Serial.print(getBit(i));
@@ -445,10 +491,8 @@ void Lixie::build_controller(const uint8_t pin){
 			controller = &FastLED.addLeds<LED_TYPE, 2, COLOR_ORDER>(leds, NumLEDs);
 		else if (pin == 4)
 			controller = &FastLED.addLeds<LED_TYPE, 4, COLOR_ORDER>(leds, NumLEDs);
-		else if (pin == 12)
-			controller = &FastLED.addLeds<LED_TYPE, 12, COLOR_ORDER>(leds, NumLEDs);
-		else if (pin == 13)
-			controller = &FastLED.addLeds<LED_TYPE, 13, COLOR_ORDER>(leds, NumLEDs);
+		else if (pin == 5)
+			controller = &FastLED.addLeds<LED_TYPE, 5, COLOR_ORDER>(leds, NumLEDs);
 	#endif
 }
 
