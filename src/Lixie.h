@@ -8,6 +8,7 @@ Released under the GPLv3 license.
 #define lixie_h
 
 #include "Arduino.h"
+#define FASTLED_ESP8266_RAW_PIN_ORDER
 #include "FastLED.h"
 
 #ifndef LED_TYPE
@@ -32,6 +33,9 @@ class Lixie{
 		void write_flip(uint32_t input, uint16_t flip_time = 100);
 		
 		void sweep(CRGB col);
+		void progress(byte percent, CRGB col1, CRGB col2);
+		void flash_in(CRGB col);
+		void flash_out(CRGB col);
     
 		void write_digit(byte input, byte index);
 		void push_digit(byte number);
@@ -50,6 +54,7 @@ class Lixie{
 		void color_fade(CRGB col, uint16_t duration, byte index);
 		
 		void color_array_fade(CRGB *cols, uint16_t duration);
+		void color_array_fade(CHSV *cols, uint16_t duration);
 
 		void brightness(byte bright);
 		void color_balance(CRGB c_adj);
