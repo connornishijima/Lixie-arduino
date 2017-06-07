@@ -12,8 +12,8 @@
  
 #include "Lixie.h" // Include Lixie Library
 
-const int dataPin1 = 13; // Data pin for Lixie group #1
-const int dataPin2 = 12; // Data pin for Lixie group #2
+const int dataPin1 = 4; // Data pin for Lixie group #1
+const int dataPin2 = 5; // Data pin for Lixie group #2
 const int numLixies = 1; // # of Lixies in each group (1-9)
 
 int countUp;
