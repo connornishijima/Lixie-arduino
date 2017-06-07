@@ -24,7 +24,7 @@
 */
 
 #include "Lixie.h" // Include Lixie Library
-#define DATA_PIN   13
+#define DATA_PIN   5
 #define NUM_LIXIES 4
 Lixie lix(DATA_PIN, NUM_LIXIES);
 
