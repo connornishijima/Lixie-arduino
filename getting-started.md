@@ -8,11 +8,11 @@ Once you've unboxed your new Lixies, they'll have a paper cover on the top. This
 
 ## Lixies don't do anything on their own.
 
-The Lixie display is a bit more cost effective than competitors like the NixiePipe due to it being a "naive" display. It has no onboard controller you can program, you'll need an external microcontroller like the Arduino or ESP8266.
+The Lixie display is a bit more cost effective than competitors like the NixiePipe due to it being a "naive" display. It has no onboard controller you can program, you'll need an external microcontroller like the Arduino or ESP8266 to display anything.
 
 ## Microcontroller
 
-Any AVR/Arduino or ESP8266-derivative microcontroller can be used to control Lixie displays. There is a Lixie library available for the Arduino IDE:
+Any AVR/Arduino or ESP8266/derivative microcontroller can be used to control Lixie displays. There is a Lixie library available for the Arduino IDE:
 
 - Click: Menu  >  Sketch  >  Include Library  >  Manage Libraries
 - Search for "Lixie"
