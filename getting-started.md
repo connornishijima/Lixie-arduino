@@ -91,3 +91,6 @@ Lixies are designed to be daisy-chained, and run from right-to-left. Connecting 
     ETC...   <----   LIXIE #2 5V    <----   LIXIE #1 5V     <----   POWER SUPPLY 5V
     ETC...   <----   LIXIE #2 GND   <----   LIXIE #1 GND    <----   POWER SUPPLY GND
     ETC...   <----   LIXIE #2 DIN   <----   LIXIE #1 DOUT   <----   MICROCONTROLLER PIN
+    
+If you are using your development board (Arduino/ESP8266 Breakout) as the power source, make sure to use the **lix.max_power(5,450);** limit we talked about earlier to make sure the displays don't overdraw your computer's USB port during development.
+
