@@ -86,6 +86,8 @@ Hookup looks like this:
 
 Lixies are designed to be daisy-chained, and run from right-to-left. Connecting one display to the next is like this:
 
+**HOOKUP IMAGE HERE**
+
     ETC...   <----   LIXIE #2 5V    <----   LIXIE #1 5V     <----   POWER SUPPLY 5V
     ETC...   <----   LIXIE #2 GND   <----   LIXIE #1 GND    <----   POWER SUPPLY GND
     ETC...   <----   LIXIE #2 DIN   <----   LIXIE #1 DOUT   <----   MICROCONTROLLER PIN
