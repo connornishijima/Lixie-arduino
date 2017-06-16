@@ -60,7 +60,7 @@ For example, if I wanted to run a 6-digit clock in full white off of a computer'
 
     lix.max_power(5,500);
     
-in my Arduino setup() function. Normally, a 6-digit white clock would consume 720mA, but with the 500mA limit set it will run at 69.4% of the maximum brightness to keep consumption at 500mA. However, this still means we're running the USB port at its max rating, to limiting it to 400mA would be safer. (55.5% brightness)
+in my Arduino setup() function. Normally, a 6-digit white clock would consume 720mA, but with the 500mA limit set it will run at 69.4% of the maximum brightness to keep consumption at 500mA. However, this still means we're running the USB port at its max rating, so limiting it to 400mA would be safer. (55.5% brightness)
 
 This software power limit is designed to only reduce brightness *if the current lighting exceeds the power ratings*. If the formentioned clock was only run in green instead, it would consume 240mA and thus would still run at full brightness under a 500mA regulation.
 
