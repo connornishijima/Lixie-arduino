@@ -28,19 +28,21 @@ When finished, an example folder structure for Windows should be:
 
     C:\Users\[USERNAME]\Documents\Arduino\libraries\Lixie\src\Lixie.cpp
 
-## Wiring
+## Powering Lixies
 
 Before using Lixies, I highly suggest reading through [Adafruit's "NeoPixel Uberguide"](https://learn.adafruit.com/adafruit-neopixel-uberguide/overview). It goes over many details of how the WS2812/B/S smart-RGB LED works. It's one of the most well-written guides out there. There are 20 of these LEDs in each Lixie digit, so you have to consider the following for your power requirements:
 
-### Lixies are powered and controlled with 5V.
+### Lixies are powered and best controlled with 5V.
 
 The 20 WS2812B LEDs onboard are nominally powered with 5 volts DC, and expect at least 3.5V (Power voltage\*0.7) on the DIN line to control the pixels. If you have a 3V3-logic microcontroller, you may or may not have to use [a level shifter](https://www.adafruit.com/product/1787). Personally, I have successfully run Lixies off of a 3.3V Adafruit Huzzah (ESP-12 controller) without needing a level shifter - even with the LEDs powered by the 5 volt "V+" line.
 
+A workaround is underpowering the LEDs with a 3.3V power line, but this will only be 66% of the brightness 5V power provides.
+
 ### Are you running them in combined colors, or full white?
 
-Showing a number at full white means only 2 of the 20 LEDs are at full power. With a power consumption of 60mA per fully lit LED, that's 120mA at most per Lixie. If you were only displaying in red, green, or blue the consumption would be 40mA, a combination like cyan, magenta or yellow would take 80mA.
+Showing a number at full white means only 2 of the 20 LEDs are at full power. With a power consumption of 60mA per fully lit LED, that's 120mA at most per Lixie. If you were only displaying in red, green, or blue the consumption would be 40mA, a combination like cyan, magenta or yellow would take 80mA per Lixie.
 
-At this rate, a 6-digit clock at full brightness in white would consume 120mA\*6 = 720mA or 0.72A. This could be powered over USB with a standard AC phone charger.
+At this rate, a 6-digit clock at full brightness in white would consume 120mA\*6 = 720mA or 0.72A. This could be powered over USB with a standard USB phone wall charger.
 
 ### Are you needing any lightshow effects beyond numbers?
 
@@ -52,7 +54,7 @@ If you want to allow for any possible lighting scenario, you'll need to have a p
 
 #### Software Regulation
 
-Lixie's library offers a handy **lix.max_power(*volts*, *milliamps*);** function that you can call in your setup before writing anything in the displays. This uses some quick math to determine if the scene you're writing to the LEDs will overreach your power supply limits, and globally reduce digit brightness to keep power consumption under the limits of your supply.
+Lixie's library offers a handy **lix.max_power(*volts*, *milliamps*);** function that you can call in your setup before writing anything in the displays. This uses some quick math to determine if the scene you're writing to the LEDs will overreach your power supply limits, and automatically reduce digit brightness to keep power consumption under the limits of your supply.
 
 For example, if I wanted to run a 6-digit clock in full white off of a computer's USB port, (5V, 500mA max) I would include
 
@@ -60,4 +62,30 @@ For example, if I wanted to run a 6-digit clock in full white off of a computer'
     
 in my Arduino setup() function. Normally, a 6-digit white clock would consume 720mA, but with the 500mA limit set it will run at 69.4% of the maximum brightness to keep consumption at 500mA. However, this still means we're running the USB port at its max rating, to limiting it to 400mA would be safer. (55.5% brightness)
 
-This software power limit is designed to only reduce brightness *if the current lighting exceeds the power ratings*. If the formentioned clock was only run in green instead, it would consume 240mA and thus would still run at full brightness.
+This software power limit is designed to only reduce brightness *if the current lighting exceeds the power ratings*. If the formentioned clock was only run in green instead, it would consume 240mA and thus would still run at full brightness under a 500mA regulation.
+
+## Wiring
+
+Lixies are limited to the following Arduino digital pins:
+
+### AVR: 0,1,2,3,4,5,6,7,8,9,10,11,12,13
+
+### ESP8266: 0,2,4,5
+
+The limits on ESP8266 pins is due to the Arduino compiler being unable to detect which type of ESP8266 breakout you're using, if at all. Between the most common ESP8266 versions - ESP-12, ESP-07, Adafruit Huzzah, NodeMCU, Wemos D1 Mini - these are the pins found on every one. If the library defined a pin not present on your version of the breakout, compilation would fail.
+
+In all the example code, the default pin used is Pin 5, whether you're using AVR or ESP8266 microcontrollers.
+
+Hookup looks like this:
+
+**HOOKUP IMAGE HERE**
+
+POWER SUPPLY 5V       ---->   LIXIE 5V
+POWER SUPPLY GND      ---->   LIXIE GND
+MICROCONTROLLER PIN   ---->   LIXIE DIN
+
+Lixies are designed to be daisy-chained, and run from right-to-left. Connecting one display to the next is like this:
+
+ETC...   <----   LIXIE #2 5V    <----   LIXIE #1 5V     <----   POWER SUPPLY 5V
+ETC...   <----   LIXIE #2 GND   <----   LIXIE #1 GND    <----   POWER SUPPLY GND
+ETC...   <----   LIXIE #2 DIN   <----   LIXIE #1 DOUT   <----   MICROCONTROLLER PIN
