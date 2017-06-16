@@ -94,3 +94,35 @@ Lixies are designed to be daisy-chained, and run from right-to-left. Connecting 
     
 If you are using your development board (Arduino/ESP8266 Breakout) as the power source, make sure to use the **lix.max_power(5,450);** limit we talked about earlier to make sure the displays don't overdraw your computer's USB port during development.
 
+*You can use Dupont female-to-female jumpers to connect the displays, or solder directly to the headers.*
+
+If you have 4 or more displays in the chain, I recommend connecting *BOTH* ends of the chain to the 5V/GND lines of the power supply to avoid having dimmer digits at the end of the chain. (Due to the voltage drop across displays) Without doing so, you may notice the displays on the far end of the chain being a more orange-ish color. This is due to the different voltage requirements of the individual red, green, and blue LEDs.
+
+Blue requires the most voltage to light, followed by green then red needing the lowest voltage. If a digit is receiving less than 5 volts, the blue will be the first to drop its performance, then green. If the display is supposed to be white (equal parts RGB) you'll get something like this instead:
+
+Red (full power) + Green (dim) + Blue (darkest) = Orange
+
+## Writing Arduino code for Lixies
+
+Once you've installed the Lixie library, go ahead and try this example code to make sure everything is working:
+
+    #include "Lixie.h" // Include Lixie Library
+    
+    #define DATA_PIN   5
+    #define NUM_LIXIES 1
+    Lixie lix(DATA_PIN, NUM_LIXIES);
+    
+    uint16_t count = 0;
+    
+    void setup() {
+      lix.begin(); // Initialize LEDs
+      lix.max_power(5,450); // Set software power limit
+    }
+    
+    void loop() {
+      lix.write(count); // Display count
+      delay(100);
+      count++;
+    }
+    
+Change the **NUM_LIXIES** variable to match the number of digits you have wired up.
