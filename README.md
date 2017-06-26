@@ -37,7 +37,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 ------------
 # Getting Started:
 
-![Example Sketch](http://i.imgur.com/pUESpaD.jpg)
+# \*Getting Started has moved to it's own guide [HERE](https://github.com/connornishijima/Lixie-arduino/blob/master/getting-started.md)!
 
 ----------
 # Basic Functions
