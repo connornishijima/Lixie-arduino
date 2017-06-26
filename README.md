@@ -1,6 +1,6 @@
 ![Lixie Library](http://i.imgur.com/IzgIYfg.jpg)
 
-#Library for driving Lixie edge-lit displays!
+# Library for driving Lixie edge-lit displays!
 
 *Disclaimer: This library is still in early development and may change drastically in the coming weeks! It also depends on the "FastLED" library from Daniel Garcia, so make sure you have that installed as well!*
 
