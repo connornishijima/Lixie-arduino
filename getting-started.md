@@ -1,6 +1,6 @@
 ![Getting Started with LIXIE](https://i.imgur.com/tDlQ9IJ.jpg "Getting Started with LIXIE")
 
-I know you're excited, but we have a few things to cover to make sure you're ready to run Lixie displays!
+### *I know you're excited, but we have a few things to cover to make sure you're ready to run Lixie displays!*
 
 ## Protective Cover
 
