@@ -113,8 +113,8 @@ class Lixie{
 		bool nixie_aura = false;
 		byte nixie_aura_level = 0;
 		byte nixie_aura_level_default = 8;
-		CRGB nixie_col_ion = CRGB(255,70,25);
-		CRGB nixie_col_aura = CRGB(45,85,255);
+		CRGB nixie_col_ion = CRGB(255,70,15);
+		CRGB nixie_col_aura = CRGB(0,100,255);
 };
 
 #endif
