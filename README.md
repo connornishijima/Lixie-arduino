@@ -2,9 +2,7 @@
 
 # Library for driving Lixie edge-lit displays!
 
-*Disclaimer: This library is still in early development and may change drastically in the coming weeks! It also depends on the "FastLED" library from Daniel Garcia, so make sure you have that installed as well!*
-
-This library allows for easy writing to Lixie digit displays! It takes care of all the addressing and updating for you!
+This library allows for easy writing to Lixie Panels! It takes care of all the addressing and updating for you!
 
 ----------
 # Contents
@@ -20,7 +18,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 ----------
 # Installation
 
-***The Lixie library relies on the FastLED library from Daniel Garcia, so make sure you have that installed as well!***
+***The Lixie library relies on [the FastLED library from Daniel Garcia](https://github.com/FastLED/FastLED), so make sure you have that installed as well!***
 
 **With Arduino Library Manager:**
 
@@ -40,7 +38,7 @@ This library allows for easy writing to Lixie digit displays! It takes care of a
 ## \*Getting Started has moved to it's own guide [HERE](https://github.com/connornishijima/Lixie-arduino/blob/master/getting-started.md)!
 
 ----------
-# Basic Functions
+# Some Basic Functions
 
 **lix.begin**();
 
@@ -69,13 +67,17 @@ Sets the "off" color of the digits using RGB. This is the color of all inactive 
 Force the Lixies to update with current values and colors. Called automatically after every write call.
 
 ----------
-# Advanced Functions
+# Some Advanced Functions
+
+**lix.nixie_mode**(bool **enabled**);
+
+The best damn Not-A-Nixie-Tube out there. Includes a well balanced amber digit, with neon aura emulation for a very convincing look.
 
 **lix.brightness**(byte **bright**);
 
 Sets the brightness of the displays, from 0 - 255. (Default: 255)
 
-**lix.color_balance**(CRGB **c_adj**);
+**lix.white_balance**(CRGB **c_adj**);
 
 Sets a color calibration for the LEDs. Supports all FastLED color temperatures, and custom temperatures in the form CRGB(r, g, b). (Default: Tungsten100W / R: 255 G: 214 B: 170)
 
@@ -107,6 +109,10 @@ Prints the values of the led_states array, in binary, to the serial console.
 **lix.print_current**();
 
 Prints the current values on the display, in integers, to the serial console.
+
+**lix.get_number**();
+
+Returns the current number the display is showing in uint32_t form.
 
 ----------
 # Troubleshooting

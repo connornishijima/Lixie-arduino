@@ -1,6 +1,23 @@
 # LIXIE for ARDUINO CHANGE LOG:
 (Most recent at top, please!)
 
+Added Nixie Mode functionality! (7/17/17 - connornishijima)
+-----------------------------------------------------------
+People often buy Lixies because Nixies won't work for them, either functionally or financially. I've spent quite a bit of time dialing in just the right numbers to closely emulate the beautiful Nixie Tube glow. This is done with two details:
+
+- Ionized color (amber)
+- Aura color (pale blue)
+
+These two colors in the right mix make for the awesome new *lix.nixie_mode(bool **enabled**)* function! Just enable or disable it to switch on and off the new Nixie theme. The aura emulation intensity can be turned up, down or off with *lix.nixie_aura_intensity(byte **val**);*. A usage example can be found in Examples -> advanced_features_tour.
+
+Added "Advanced Features Tour" Example Sketch (7/17/17 - connornishijima)
+-----------------------------------------------------------
+This new demo has many of the special functions I've added but yet to share publically - including the new Nixie Mode!
+
+Fixed lix.brightness() function (7/17/17 - connornishijima)
+-----------------------------------------------------------
+I found that FastLED.setBrightness() doesn't actually work with the CLEDController implementation that allows for multiple Lixie chains. Brightness settings are now manually enforced throughout the library!
+
 Fixed pin assignment issue for ESP8266 (6/7/17 - connornishijima)
 -----------------------------------------------------------
 After this change, only pins 0,2,4 and 5 are usable for Lixie on ESP8266. Because the Arduino IDE has no way of differentiating between different version of the ESP8266 breakout boards or SMT modules, I have to go with this solution that covers all popular bases like the bare ESP-12, Wemos, HUZZAH, NodeMCU, and more. Before, the default pin of sketches was 13. This worked for Arduino, and for the Adafruit Huzzah I was using. But a WEMOS D1 Mini or NodeMCU doesn't have a pin assigned to "D13", leading users to a compile-time error that wasn't very descript at all. It should work now!
