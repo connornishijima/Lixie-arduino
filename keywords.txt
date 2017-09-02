@@ -12,7 +12,7 @@
 
 begin	KEYWORD2
 clear	KEYWORD2
-clear_digit KEYWORD2
+clear_digit	KEYWORD2
 show	KEYWORD2
 write	KEYWORD2
 write_fade	KEYWORD2
@@ -24,22 +24,22 @@ color_off	KEYWORD2
 color_wipe	KEYWORD2
 color_fade	KEYWORD2
 color_array_fade	KEYWORD2
-nixie_mode  KEYWORD2
-nixie_aura_intensity  KEYWORD2
-brightness  KEYWORD2
+nixie_mode	KEYWORD2
+nixie_aura_intensity	KEYWORD2
+brightness	KEYWORD2
 white_balance	KEYWORD2
 max_power	KEYWORD2
 get_numdigits	KEYWORD2
 get_number	KEYWORD2
 maxed_out	KEYWORD2
-get_leds  KEYWORD2
+get_leds	KEYWORD2
 print_binary	KEYWORD2
-print_current KEYWORD2
-sweep KEYWORD2
-progress KEYWORD2
-fill_fade_in KEYWORD2
-fill_fade_out KEYWORD2
-lix KEYWORD2
+print_current	KEYWORD2
+sweep	KEYWORD2
+progress	KEYWORD2
+fill_fade_in	KEYWORD2
+fill_fade_out	KEYWORD2
+lix	KEYWORD2
 
 ###################################
 # Constants (LITERAL1)
