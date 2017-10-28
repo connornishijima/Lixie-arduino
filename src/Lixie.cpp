@@ -67,6 +67,9 @@ void Lixie::clear(bool show_change) {
 
 void Lixie::show(){
 	for(uint16_t i = 0; i < NumLEDs; i++){
+#ifdef ESP8266
+		yield();
+#endif
 		CRGB col;
 		CRGB col_off;
 		if(nixie == true){
@@ -110,6 +113,9 @@ void Lixie::show(){
 		
 		//Enforce brightness
 		leds[i] = enforce_brightness(leds[i]);
+#ifdef ESP8266
+		yield();
+#endif
 	}
 	
 	controller->showLeds();
@@ -683,8 +689,14 @@ void Lixie::progress(float percent, CRGB col1, CRGB col2){
 			leds[i] = col1;
 		}
 		leds[i] = enforce_brightness(leds[i]);
+#ifdef ESP8266
+		yield();
+#endif
 	}
 	FastLED.show();
+#ifdef ESP8266
+	yield();
+#endif
 }
 
 void Lixie::print_binary() const{
