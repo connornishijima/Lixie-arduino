@@ -1,4 +1,4 @@
-![Lixie Library](http://i.imgur.com/IzgIYfg.jpg)
+![Lixie Library](https://i.imgur.com/MH40PLQ.jpg)
 
 # Library for driving Lixie edge-lit displays!
 
