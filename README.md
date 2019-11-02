@@ -1,8 +1,12 @@
 ![Lixie Library](https://i.imgur.com/MH40PLQ.jpg)
 
+## LIXIE II WARNING
+
+If you are here to find code for the new ***[LIXIE II](https://www.tindie.com/products/connornishijima/lixie-ii-the-newnixie-for-arduino-kit/)*** displays, this library won't work properly! You're probably looking for **[the new one](https://github.com/connornishijima/Lixie_II)**.
+
 # Library for driving Lixie edge-lit displays!
 
-This library allows for easy writing to Lixie Panels! It takes care of all the addressing and updating for you!
+This library allows for easy writing to Lixie 1 Displays! It takes care of all the addressing and updating for you!
 
 ----------
 # Contents
