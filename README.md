@@ -2,7 +2,9 @@
 
 ## LIXIE II WARNING
 
-If you are here to find code for the new ***[LIXIE II](https://www.tindie.com/products/connornishijima/lixie-ii-the-newnixie-for-arduino-kit/)*** displays, this library won't work properly! You're probably looking for **[the new one](https://github.com/connornishijima/Lixie_II)**.
+If you are here to find code for the new ***[LIXIE II](https://www.tindie.com/products/connornishijima/lixie-ii-the-newnixie-for-arduino-kit/)*** displays, this library won't work properly!
+
+You're probably looking for **[the new library](https://github.com/connornishijima/Lixie_II)** instead.
 
 # Library for driving Lixie edge-lit displays!
 
